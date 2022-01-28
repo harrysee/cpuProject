@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\modules.c" />
-    <ClCompile Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\pushpull.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="modules.c" />
+    <ClCompile Include="pushpull.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\modules.h" />
-    <ClInclude Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\pushpull.h" />
+    <ClInclude Include="modules.h" />
+    <ClInclude Include="pushpull.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\push.wav" />

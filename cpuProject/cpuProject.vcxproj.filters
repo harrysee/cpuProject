@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\pushpull.c">
+    <ClCompile Include="pushpull.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\modules.c">
+    <ClCompile Include="modules.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="main.c">
@@ -26,11 +26,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\pushpull.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="pushpull.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\modules.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="modules.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
