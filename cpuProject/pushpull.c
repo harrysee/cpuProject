@@ -243,6 +243,8 @@ void line(int x, int y)
 
 	gotoxy(45, 19);
 	printf("메뉴로 돌아가려면 ESC를 눌러주세요\n");
+	gotoxy(0, 24);
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 
 	char end = _getch();
 	if (end == ESC) {
@@ -258,7 +260,9 @@ void start_game() {
 	gotoxy(47, 12);
 	printf("첫번째 팀 이름입력 후 엔터!> ");
 	scanf_s("%s", &t_name1, 20);
-	gotoxy(47, 14);
+	gotoxy(60, 12);
+	printf("VS");
+	gotoxy(64, 12);
 	printf("두번째 팀 이름입력 후 엔터!> ");
 	scanf_s("%s", &t_name2, 20);
 
