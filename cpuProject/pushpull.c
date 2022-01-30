@@ -1,4 +1,4 @@
-#include "pushpull.h"
+ï»¿#include "pushpull.h"
 #include <conio.h>
 #include <windows.h>
 
@@ -37,7 +37,7 @@ enum KEYBOARD
 	DOWN = 80
 };
 
-// °ÔÀÓ ½ÃÀÛ ¸ŞÀÎ ÇÔ¼ö
+// ê²Œì„ ì‹œì‘ ë©”ì¸ í•¨ìˆ˜
 void pushpull() {
 	system("cls");
 	PlaySound(TEXT("push.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
@@ -58,84 +58,79 @@ void pushpull() {
 	return 0;
 }
 
-// °ÔÀÓ ¸ŞÀÎÈ­¸é ÇÔ¼ö
+// ê²Œì„ ë©”ì¸í™”ë©´ í•¨ìˆ˜
 void main_show() {
 	system("cls");
 	gotoxy(36, 5);
-	printf("¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú ÁÙ´Ù¸®±â ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú");
-	printf("¡Ú");
+	printf("             â–³â–¡â—‹ ì¤„ë‹¤ë¦¬ê¸° â–³â–¡â—‹");
 	gotoxy(36, 7);
-	printf("¡Ú         AÅ°¿Í LÅ°¸¦ ¸¶±¸¸¶±¸ ¿¬Å¸!!          ¡Ú");
+	printf("â˜…          Aí‚¤ì™€ Lí‚¤ë¥¼ ë§ˆêµ¬ë§ˆêµ¬ ì—°íƒ€           â˜…");
 	gotoxy(36, 9);
-	printf("¡Ú ÁÙÀ» °¡Àå »¡¸® ÀÚ±âÂÊÀ¸·Î ´ç±â´Â °ÔÀÓÀÔ´Ï´Ù! ¡Ú");
+	printf("â˜…   ì¤„ì„ ë¹¨ë¦¬ ë‹¹ê²¨ì„œ ìƒëŒ€ë°©ì„ ë–¨ì–´ëœ¨ë¦¬ëŠ” ê²Œì„  â˜…");
 	gotoxy(36, 11);
-	printf("¡Ú                 ´ÜÆÇ ½ÂºÎ!                   ¡Ú");
+	printf("â˜…            í˜ì˜ì°¨ì´ë³´ë‹¤ ì „ëµì´ ì¤‘ìš”!         â˜…");
 	gotoxy(36, 13);
-	printf("¡Ú  °ÔÀÓÁ¾·á¸¦ ¼±ÅÃÇØ ¸Ş´ºÈ­¸éÀ¸·Î µ¹¾Æ°¡¼¼¿ä   ¡Ú");
+	printf("â˜…  ê²Œì„ì¢…ë£Œë¥¼ ì„ íƒí•˜ê³  ë©”ë‰´í™”ë©´ìœ¼ë¡œ ëŒì•„ê°€ì„¸ìš” â˜…");
 	gotoxy(36, 15);
-	printf("¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú");
+	printf("â–³â–¡â—‹  â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…  â–³â–¡â—‹");
 
 	gotoxy(40, 17);
-	printf("¡Ü");
+	printf("â—");
 	gotoxy(39, 18);
-	printf("¡¬|/");
+	printf("ï¼¼|/");
 	gotoxy(40, 19);
-	printf(" |");
+	printf("456");
 	gotoxy(40, 20);
-	printf("/¡¬");
+	printf("/ï¼¼");
 
 	x = 6;
 	y = 5;
-	print_auto_y(&x, &y, " ./¡¬£ß£¯¡¬");
-	print_auto_y(&x, &y, " £¯ _/¡¡_ ¡¬");
-	print_auto_y(&x, &y, " |¡¡¦¬¡¡ ¦¬¡¡i");
-	print_auto_y(&x, &y, " ¡¬= (_ìÑ_) ");
+	print_auto_y(&x, &y, " ./ï¼¼ï¼¿ï¼ï¼¼");
+	print_auto_y(&x, &y, " ï¼ _/ã€€_ ï¼¼");
+	print_auto_y(&x, &y, " |ã€€â”ã€€ â”ã€€i");
+	print_auto_y(&x, &y, " ï¼¼= (_äºº_) ");
 	print_auto_y(&x, &y, "   ========");
-	print_auto_y(&x, &y, "  £¯£ş£ş¡Ò¡¬/¡Ò)¡ª¡ª¡ª¡ª¡ª¡ª¡ª");
-	print_auto_y(&x, &y, ". /¡¡¡¡¡¡¡¡£ß£¯¡¡");
-	print_auto_y(&x, &y, ". |¡¡¡¡¡¡¡¬");
-	print_auto_y(&x, &y, "  ¡¬ ¡¬_¡¡¡¬");
-	print_auto_y(&x, &y, "   ¡¬/.¡¬_/");
+	print_auto_y(&x, &y, "  ï¼ï¿£ï¿£âŒ’ï¼¼/âŒ’)â€•â€•â€•â€•â€•â€•â€•");
+	print_auto_y(&x, &y, ". /ã€€ã€€ã€€ã€€ï¼¿ï¼ã€€");
+	print_auto_y(&x, &y, ". |ã€€ã€€ã€€ï¼¼");
+	print_auto_y(&x, &y, "  ï¼¼ ï¼¼_ã€€ï¼¼");
+	print_auto_y(&x, &y, "   ï¼¼/.ï¼¼_/");
 
 	x = 90;
 	y = 10;
-	print_auto_y(&x, &y, "    ¡ø_¡¬");
-	print_auto_y(&x, &y, "	¡¬¡¬ ¥Ë£ß¥Ë");
-	print_auto_y(&x, &y, "	  ¡¬(¢§¥ø¢§)    µÒÄ©");
-	print_auto_y(&x, &y, "	      > ¡Ò`");
-	print_auto_y(&x, &y, "	      / ªØ¡¬");
-	print_auto_y(&x, &y, "	     /¡¡/¡¬¡¬");
-	print_auto_y(&x, &y, "	     /  «Î¡¡¡¬_ªÄ");
-	print_auto_y(&x, &y, "	    /  /");
-	print_auto_y(&x, &y, "µÒÄ©     /¡¡/|");
-	print_auto_y(&x, &y, "	  (   (`");
-	print_auto_y(&x, &y, "	  | |¡¢¡¬");
-	print_auto_y(&x, &y, "	  | | ¡¬ ¡Ò)");
-	print_auto_y(&x, &y, "	  | |¡¡¡¡) /");
-	print_auto_y(&x, &y, "	 «Î )¡¡¡¡L/");
-	print_auto_y(&x, &y, "      (___/     µÒÄ©");
+	print_auto_y(&x, &y, "             ï¼âŒ’ï¼¼");
+	print_auto_y(&x, &y, "           ï¼ã€€   ï¼¼");
+	print_auto_y(&x, &y, "	    /ã€€ã€€ã€€  ï¼¼");
+	print_auto_y(&x, &y, "	   /ã€€ã€€ã€€ã€€   ï¼¼");
+	print_auto_y(&x, &y, "	   ( / ã€€ ã€€    )");
+	print_auto_y(&x, &y, "	   f  ã€€       ï½œ");
+	print_auto_y(&x, &y, "	   | â—ã€€ã€€â—ã€€ï½œ");
+	print_auto_y(&x, &y, "	   |ã€€ â–½ã€€ã€€ã€€ï½œ");
+	print_auto_y(&x, &y, "         |ï¼¿ï¼¿ ã€€ ã€€ãƒ");
+	print_auto_y(&x, &y, "	   ä¸ä¸ä¸ä¸ä¸ï¿£lï¼¼");
+	print_auto_y(&x, &y, "	   ã(_(_(ï¼¿Lï¼¿)ãƒ");
 
 
 
 	gotoxy(77, 17);
-	printf(" ¡Ü");
+	printf(" â—");
 	gotoxy(76, 18);
-	printf("¡¬|/");
+	printf("ï¼¼|/");
 	gotoxy(77, 19);
-	printf(" |");
+	printf("001");
 	gotoxy(77, 20);
-	printf("/¡¬");
+	printf("/ï¼¼");
 
 	gotoxy(56, 18);
-	printf("°ÔÀÓ ½ÃÀÛ");
+	printf("ê²Œì„ ì‹œì‘");
 
 	gotoxy(56, 20);
-	printf("°ÔÀÓ Á¾·á");
+	printf("ê²Œì„ ì¢…ë£Œ");
 
-	print_by_name("ÃÖÀ±°æ");
+	print_by_name("ê³ ì—ìŠ¤ë” ê¹€ë¯¼ì£¼ ì „ìœ ë¦¬");
 }
 
-// ¸Ş´º ¼±ÅÃ Ä¿¼­ ÇÔ¼ö
+// ë©”ë‰´ ì„ íƒ ì»¤ì„œ í•¨ìˆ˜
 enum MENU game() {
 	int y = 0;
 	while (1) {
@@ -185,14 +180,14 @@ enum MENU game() {
 }
 
 
-// ÁÙ´Ù¸®±â ±×·ÁÁÖ´Â ÇÔ¼ö
+// ì¤„ë‹¤ë¦¬ê¸° ê·¸ë ¤ì£¼ëŠ” í•¨ìˆ˜
 void line(int x, int y)
 {
 	system("cls");
-	int i, line[21] = { 0 };
-	line[10] = 1;
-	line[4] = 2;
-	line[16] = 2;
+	int i, line[41] = { 0 };
+	line[20] = 1;
+	line[8] = 2;
+	line[32] = 2;
 	gotoxy(31, 13);
 	for (i = 0; i < 78; i++)
 		printf(" ");
@@ -203,74 +198,80 @@ void line(int x, int y)
 	printf("%s", t_name2);
 
 	int peple = 0;
-	gotoxy(x - 10, 10);
-	printf("¡Ü");
-	gotoxy(x - 11, 11);
-	printf("¡¬|¡¬");
-	gotoxy(x - 10, 12);
-	printf(" |");
-	gotoxy(x - 10, 13);
-	printf("/¡¬");
+	gotoxy(x - 16, 10);
+	printf("â—  â— â— â—  â—  â—  â— â—");
+	gotoxy(x - 16, 11);
+	printf("ï¼¼â–¡â–¡ï¼¼â–¡ï¼¼â–¡â–¡â–¡ï¼¼â–¡â–¡ï¼¼â–¡â–¡ï¼¼");
+	gotoxy(x - 15, 12);
+	printf("| | |  |  | | | | |");
+	gotoxy(x - 16, 13);
+	printf("/ï¼¼/ï¼¼/ï¼¼/ï¼¼/ï¼¼/ï¼¼/ï¼¼");
 
-	gotoxy(x + 47, 10);
-	printf(" ¡Ü");
-	gotoxy(x + 46, 11);
-	printf("/|/");
-	gotoxy(x + 47, 12);
-	printf(" |");
-	gotoxy(x + 47, 13);
-	printf("/¡¬");
+	gotoxy(x + 37, 10);
+	printf("  â—  â—  â—  â— â— â—  â— â—");
+	gotoxy(x + 34, 11);
+	printf("/â–¡/â–¡/â–¡â–¡â–¡/|â–¡/â–¡â–¡â–¡/â–¡/â–¡/â–¡/");
+	gotoxy(x + 37, 12);
+	printf(" | | | |  |  | | | |");
+	gotoxy(x + 37, 13); 
+	printf("/ï¼¼/ï¼¼/ï¼¼/ï¼¼/ï¼¼/ï¼¼/ï¼¼");
 
+	gotoxy(0, 14);
+	printf("â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– ");
+	gotoxy(78, 14);
+	printf("â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– ");
+
+	gotoxy(40, 24);
+	printf("â— ï¼¼__ /_          /â—/__-_       ï¼¼â—_   _/  (");
+	gotoxy(20, 25);
+	printf("â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²â–²");
 	gotoxy(42, 2);
-	printf("¿òÁ÷ÀÌÁö ¾Ê´Â´Ù¸é ÇÑ¿µÅ°¸¦ ¹Ù²ãº¸¼¼¿ä!");
+	printf("ì›€ì§ì´ì§€ ì•ŠëŠ”ë‹¤ë©´ í•œì˜í‚¤ ë°”ê¾¸ê¸°!");
 
-	// x,yÇÔ¼ö·Î line±×·ÁÁÜ x =40, y = 11
+	// x,yí•¨ìˆ˜ë¡œ lineê·¸ë ¤ì¤Œ x =40, y = 11
 	gotoxy(x, 11);
-	for (i = 0; i < 21; i++)
+	for (i = 0; i < 41; i++)
 		if (line[i] == 0)
-			printf("¡à");
+			printf("â–¡");
 		else if (line[i] == 1)
-			printf("¡á");
+			printf("â– ");
 		else
-			printf("¡ß");
+			printf("â—†");
 
 	gotoxy(58, 8);
-	printf("±âÁØÁ¡");
+	printf("ê¸°ì¤€ì ");
 	gotoxy(60, 10);
-	printf("¡å");
+	printf("â–¼");
 	gotoxy(60, 12);
-	printf("¡ã");
+	printf("â–²");
 
-	gotoxy(45, 19);
-	printf("¸Ş´º·Î µ¹¾Æ°¡·Á¸é ESC¸¦ ´­·¯ÁÖ¼¼¿ä\n");
-	gotoxy(0, 24);
-	printf("¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
+	
+	gotoxy(45, 26);
+	printf("ë©”ë‰´ë¡œ ëŒì•„ê°€ë ¤ë©´ ESCë¥¼ ëˆŒëŸ¬ì£¼ì„¸ìš”\n");
 
 	char end = _getch();
 	if (end == ESC) {
 		pushpull();
 	}
-
 }
 
 void start_game() {
 	system("cls");
-	gotoxy(47, 10);
-	printf("½ÃÀÛ Àü ÆÀ ÀÌ¸§À» Á¤ÇØÁÖ¼¼¿ä!\n");
-	gotoxy(47, 12);
-	printf("Ã¹¹øÂ° ÆÀ ÀÌ¸§ÀÔ·Â ÈÄ ¿£ÅÍ!> ");
-	scanf_s("%s", &t_name1, 20);
-	gotoxy(60, 12);
+	gotoxy(62, 12);
 	printf("VS");
-	gotoxy(64, 12);
-	printf("µÎ¹øÂ° ÆÀ ÀÌ¸§ÀÔ·Â ÈÄ ¿£ÅÍ!> ");
+	gotoxy(45, 9);
+	printf("ê²Œì„ì„ ì§„í–‰í•  íŒ€ ë“±ë¡ì„ ì§„í–‰í•˜ì‹­ì‹œì˜¤\n");
+	gotoxy(25, 12);
+	printf("ì²«ë²ˆì§¸ íŒ€ ì´ë¦„ì…ë ¥ í›„ ì—”í„°> ");
+	scanf_s("%s", &t_name1, 20);
+	gotoxy(68, 12);
+	printf("ë‘ë²ˆì§¸ íŒ€ ì´ë¦„ì…ë ¥ í›„ ì—”í„°> ");
 	scanf_s("%s", &t_name2, 20);
-
-	// ÀÌ¸§ ÀÔ·Â ÈÄ È­¸é Áö¿ì±â
+	// ì´ë¦„ ì…ë ¥ í›„ í™”ë©´ ì§€ìš°ê¸°
 	system("cls");
-	//line ±×·ÁÁÜ
+	//line ê·¸ë ¤ì¤Œ
 	line(x, y);
-	//°ÔÀÓÇÔ¼ö ½ÇÇà
+	//ê²Œì„í•¨ìˆ˜ ì‹¤í–‰
 	game_fun();
 }
 
@@ -284,13 +285,16 @@ void game_fun() {
 			line(x, y);
 			Sleep(100);
 			if (x == 28) {
+				gotoxy(78, 14);
+				printf("                                         ");
+				Sleep(500);
 				system("color 40");
 				Sleep(1000);
 				system("color 0C");
 				system("cls");
 				print_by_text(t_name1);
 				gotoxy(48, 17);
-				printf("2ÃÊ µÚ ¸ŞÀÎÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+				printf("2ì´ˆ ë’¤ ë©”ì¸í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				Sleep(2000);
 				pushpull();
 			}
@@ -301,13 +305,16 @@ void game_fun() {
 			line(x, y);
 			Sleep(100);
 			if (x == 52) {
+				gotoxy(0, 14);
+				printf("                                              ");
+				Sleep(500);
 				system("color 40");
 				Sleep(1000);
 				system("color 0C");
 				system("cls");
 				print_by_text(t_name1);
 				gotoxy(48, 17);
-				printf("2ÃÊ µÚ ¸ŞÀÎÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+				printf("2ì´ˆ ë’¤ ë©”ì¸í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				Sleep(2000);
 				pushpull();
 			}
