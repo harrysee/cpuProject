@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dalgona.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="modules.c" />
     <ClCompile Include="pushpull.c" />

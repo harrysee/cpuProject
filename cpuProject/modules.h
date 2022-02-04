@@ -14,7 +14,8 @@ enum {
 	RED,
 	PURPLE,
 	YELLOW,
-	WHITE
+	WHITE,
+	BLACK =0
 };
 
 void gotoxy(int x, int y);
@@ -31,5 +32,5 @@ void move_arrow_key(
 );
 void print_auto_y(int* x, int* y, char* str);
 void print_by_name(char* name);
-void print_by_text(char* text);
+void print_by_text(char* text, char* color, int x, int y);
 void rectangle(int width, int height, int x, int y);

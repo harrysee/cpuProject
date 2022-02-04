@@ -88,15 +88,16 @@ void print_by_name(char* name) {
 	setColor(WHITE);
 }
 
-void print_by_text(char* text) {
+void print_by_text(char* text, char* color, int x, int y) {
 	// set color : RED
-	setColor(RED);
+	setColor(color);
 
-	gotoxy(57, 15);
-	printf("%s KILL", text);
+	gotoxy(x, y);
+	printf("TEAM [ %s ] KILL", text);
 
 	setColor(WHITE);
 }
+
 
 void rectangle(int width, int height, int x, int y) {
 	// ¦£¡ª¡ª¡ª¡ª¦¤
