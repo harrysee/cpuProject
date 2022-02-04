@@ -115,63 +115,58 @@ void printstart() {
 	int x = 40;
 	int y = 11;
 	system("cls");
-	gotoxy(36, 5);
-	printf("               △□○ 줄다리기 △□○");
-	gotoxy(36, 7);
-	printf("★          이번게임은 줄다리기 입니다          ★");
-	gotoxy(36, 9);
-	printf("★ A와 L키 연타로 눌러서 우승한 팀은 통과입니다 ★");
-	gotoxy(36, 11);
-	printf("★       그럼 시작하기 눌러서 입장하십시오      ★");
-	gotoxy(36, 13);
-	printf("★               게임종료 = 메뉴화면            ★");
-	gotoxy(36, 15);
-	printf("△□○  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★  △□○");
+	gotoxy(34, 5);
+	printf("△￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣○");
+	gotoxy(34, 7);
+	printf("|                     달고나게임                     |");
+	gotoxy(34, 9);
+	printf("|    각자 자신이 원하는 모양 중 하나를 선택합니다    |");
+	gotoxy(34, 11);
+	printf("|     먹이를 먹으며 제한시간 안에 살아가면 됩니다    |");
+	gotoxy(34, 13);
+	printf("|      먹이를 다 먹지못하면 끝나는 게임입니다        |");
+	gotoxy(34, 15);
+	printf("□＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿☆");
 
-	gotoxy(40, 17);
-	printf("●");
-	gotoxy(39, 18);
-	printf("＼|/");
-	gotoxy(40, 19);
-	printf("456");
-	gotoxy(40, 20);
-	printf("/＼");
+	x = 100;
+	y = 2;
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|_∧");
+	print_auto_y(&x, &y, "|□|ㅁ0` )");
+	print_auto_y(&x, &y, "|□|⊂ ）");
+	print_auto_y(&x, &y, "|□|L");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
 
-	x = 6;
-	y = 5;
-	print_auto_y(&x, &y, " ./＼＿／＼");
-	print_auto_y(&x, &y, " ／ _/　_ ＼");
-	print_auto_y(&x, &y, " |　━　 ━　i");
-	print_auto_y(&x, &y, " ＼= (_人_) ");
-	print_auto_y(&x, &y, "   ========");
-	print_auto_y(&x, &y, "  ／￣￣⌒＼/⌒)―――――――");
-	print_auto_y(&x, &y, ". /　　　　＿／　");
-	print_auto_y(&x, &y, ". |　　　＼");
-	print_auto_y(&x, &y, "  ＼ ＼_　＼");
-	print_auto_y(&x, &y, "   ＼/.＼_/");
 
-	x = 90;
-	y = 10;
-	print_auto_y(&x, &y, "             ／⌒＼");
-	print_auto_y(&x, &y, "           ／　   ＼");
-	print_auto_y(&x, &y, "	    /　　　  ＼");
-	print_auto_y(&x, &y, "	   /　　　　   ＼");
-	print_auto_y(&x, &y, "	   ( / 　 　    )");
-	print_auto_y(&x, &y, "	   f  　       ｜");
-	print_auto_y(&x, &y, "	   | ●　　●　｜");
-	print_auto_y(&x, &y, "	   |　 ▽　　　｜");
-	print_auto_y(&x, &y, "         |＿＿ 　 　ノ");
-	print_auto_y(&x, &y, "	   丁丁丁丁丁￣l＼");
-	print_auto_y(&x, &y, "	   く(_(_(＿L＿)ノ");
+	x = 45;
+	y = 21;
+	print_auto_y(&x, &y, "　　ｏ");
+	print_auto_y(&x, &y, "　°");
+	print_auto_y(&x, &y, "　┳┳   ∩∩");
+	print_auto_y(&x, &y, "　┃┃ (0 ㅁ 0)");
+	print_auto_y(&x, &y, "┏┻┻┷━Ｏ┏┷┓┏┷┓");
+	print_auto_y(&x, &y, "┃ 　　  　 ┠┨○┠┨○┃");
+	print_auto_y(&x, &y, "┗◎━━◎┛┗◎┛┗◎┛");
+	print_auto_y(&x, &y, "-----------------------------------------------------");
 
-	gotoxy(77, 17);
-	printf(" ●");
-	gotoxy(76, 18);
-	printf("＼|/");
-	gotoxy(77, 19);
-	printf("001");
-	gotoxy(77, 20);
-	printf("/＼");
+	x = 1;
+	y = 20;
+	print_auto_y(&x, &y, "            ,===,==, ");
+	print_auto_y(&x, &y, "           ||__|＿|| ");
+	print_auto_y(&x, &y, "	    l|＿＼ ＼＼ ");
+	print_auto_y(&x, &y, "	   |□|＼＼ 　∧--∧ ");
+	print_auto_y(&x, &y, "	   |口|　＼＼(   0ㅁ0) ");
+	print_auto_y(&x, &y, "	   |口|　　＼⊂ 　 つ ");
+	print_auto_y(&x, &y, "	   |口|　 　 ＼＼つつ＼ ");
+	print_auto_y(&x, &y, "	   |口|　　　　＼| 　＼| ");
+	print_auto_y(&x, &y, "     ------------------------------------------------");
 
 	gotoxy(56, 18);
 	printf("게임 시작");
@@ -179,7 +174,7 @@ void printstart() {
 	gotoxy(56, 20);
 	printf("게임 종료");
 
-	print_by_name("전유리 고에스더 김민주");
+	print_by_name("고에스더 김민주 전유리");
 }
 
 // 게임시작 시작종료처리 함수
@@ -190,7 +185,7 @@ void dalgona() {
 		switch (gamemenu()) {
 		case GAMESTART:
 			selectShape();
-			break;
+			//break;
 
 		case EXIT:
 			//PlaySound(NULL, 0, 0);
@@ -202,13 +197,53 @@ void dalgona() {
 
 // 게임 모양선택 함수
 void selectShape() {
+	
 	system("cls");
+
+	gotoxy(50, 10);
+	printf("모양을 선택해 주세요");
+	int x = 8;
+	int y = 20;
+	print_auto_y(&x, &y, "            ○ ○ ○    ");
+	print_auto_y(&x, &y, "          ○        ○");
+	print_auto_y(&x, &y, "	  ○         ○");
+	print_auto_y(&x, &y, "	   ○        ○");
+	print_auto_y(&x, &y, "	     ○ ○ ○   ");
+	print_auto_y(&x, &y, "	             ");
+	print_auto_y(&x, &y, "	    ");
+	print_auto_y(&x, &y, "	  ");
+	print_auto_y(&x, &y, "     ");
+
+	x = 40;
+	y = 20;
+	print_auto_y(&x, &y, "             △     ");
+	print_auto_y(&x, &y, "           △  △");
+	print_auto_y(&x, &y, "	  △     △");
+	print_auto_y(&x, &y, "	 △        △");
+	print_auto_y(&x, &y, "	△ △ △ △ △   ");
+	print_auto_y(&x, &y, "	            ");
+	print_auto_y(&x, &y, "	    ");
+	print_auto_y(&x, &y, "	  ");
+	print_auto_y(&x, &y, "     ");
+
+	x = 70;
+	y = 20;
+	print_auto_y(&x, &y, "         □□□□□□□□    ");
+	print_auto_y(&x, &y, "         □            □");
+	print_auto_y(&x, &y, "	       □            □");
+	print_auto_y(&x, &y, "	       □            □");
+	print_auto_y(&x, &y, "	       □            □   ");
+	print_auto_y(&x, &y, "	       □            □    ");
+	print_auto_y(&x, &y, "	       □□□□□□□□");
+	print_auto_y(&x, &y, "	  ");
+	print_auto_y(&x, &y, "     ");
 	// while
 		// 선택모양나열
 		// 좌우키보드 조건 - 모양선택 바꿈(변수변경)
 		// ESC 조건 - 종료
 		// Enter 조건- 게임시작
-	playgame();
+	//playgame();
+	char kk = _getch();
 }
 
 
