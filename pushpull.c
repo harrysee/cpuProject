@@ -40,7 +40,7 @@ enum KEYBOARD
 // 게임 시작 메인 함수
 void pushpull() {
 	system("cls");
-	PlaySound(TEXT("happy.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+	PlaySound(TEXT("push.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	while (1) {
 		switch (game()) {
 		case GAMESTART:
@@ -62,64 +62,57 @@ void pushpull() {
 void main_show() {
 	system("cls");
 	gotoxy(36, 5);
-	printf("               △□○ 줄다리기 △□○");
+	printf("△￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣○");
 	gotoxy(36, 7);
-	printf("★          이번게임은 줄다리기 입니다          ★");
-	gotoxy(36, 9);
-	printf("★ A와 L키 연타로 눌러서 우승한 팀은 통과입니다 ★");
+	printf("|                  달고나게임                        |");
+	gotoxy(36, 9); 
+	printf("|    각자 자신이 원하는 모양 중 하나를 선택합니다    |");
 	gotoxy(36, 11);
-	printf("★       그럼 게임시작 눌러서 시작해주세요      ★");
+	printf("|    먹이를 먹으면서 제한시간 안에 살아가면 됩니다   |");
 	gotoxy(36, 13);
-	printf("★               게임종료 = 메뉴화면            ★");
+	printf("|      먹이를 다 먹지못하면 끝나는 게임입니다        |");
 	gotoxy(36, 15);
-	printf("△□○  ★★★★★★★★★★★★★★★★    △□○");
+	printf("□＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿☆");
 
-	gotoxy(40, 17);
-	printf("●");
-	gotoxy(39, 18);
-	printf("＼|/");
-	gotoxy(40, 19);
-	printf("456");
-	gotoxy(40, 20);
-	printf("/＼");
-
-	x = 6;
-	y = 5;
-	print_auto_y(&x, &y, " ./＼＿／＼");
-	print_auto_y(&x, &y, " ／ _/　_ ＼");
-	print_auto_y(&x, &y, " |　━　 ━　i");
-	print_auto_y(&x, &y, " ＼= (_人_) ");
-	print_auto_y(&x, &y, "   ========");
-	print_auto_y(&x, &y, "  ／￣￣⌒＼/⌒)―――――――");
-	print_auto_y(&x, &y, ". /　　　　＿／　");
-	print_auto_y(&x, &y, ". |　　　＼");
-	print_auto_y(&x, &y, "  ＼ ＼_　＼");
-	print_auto_y(&x, &y, "   ＼/.＼_/");
-
-	x = 90;
-	y = 10;
-	print_auto_y(&x, &y, "             ／⌒＼");
-	print_auto_y(&x, &y, "           ／　   ＼");
-	print_auto_y(&x, &y, "	    /　　　  ＼");
-	print_auto_y(&x, &y, "	   /　　　　   ＼");
-	print_auto_y(&x, &y, "	   ( / 　 　    )");
-	print_auto_y(&x, &y, "	   f  　       ｜");
-	print_auto_y(&x, &y, "	   | ●　　●　｜");
-	print_auto_y(&x, &y, "	   |　 ▽　　　｜");
-	print_auto_y(&x, &y, "         |＿＿ 　 　ノ");
-	print_auto_y(&x, &y, "	   丁丁丁丁丁￣l＼");
-	print_auto_y(&x, &y, "	   く(_(_(＿L＿)ノ");
+	x = 100;
+	y = 2;
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|_∧");
+	print_auto_y(&x, &y, "|□|ㅁ0` )");
+	print_auto_y(&x, &y, "|□|⊂ ）");
+	print_auto_y(&x, &y, "|□|L");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
+	print_auto_y(&x, &y, "|□|");
 
 
+	x = 45;
+	y = 21;
+	print_auto_y(&x, &y, "　　ｏ");
+	print_auto_y(&x, &y, "　°");
+	print_auto_y(&x, &y, "　┳┳   ∩∩");
+	print_auto_y(&x, &y, "　┃┃ (0 ㅁ 0)");
+	print_auto_y(&x, &y, "┏┻┻┷━Ｏ┏┷┓┏┷┓");
+	print_auto_y(&x, &y, "┃ 　　  　 ┠┨○┠┨○┃");
+	print_auto_y(&x, &y, "┗◎━━◎┛┗◎┛┗◎┛");
+	print_auto_y(&x, &y, "-----------------------------------------------------");
 
-	gotoxy(77, 17);
-	printf(" ●");
-	gotoxy(76, 18);
-	printf("＼|/");
-	gotoxy(77, 19);
-	printf("001");
-	gotoxy(77, 20);
-	printf("/＼");
+	x = 1;
+	y = 20;
+	print_auto_y(&x, &y, "            ,===,==, ");
+	print_auto_y(&x, &y, "           ||__|＿|| ");
+	print_auto_y(&x, &y, "	    l|＿＼ ＼＼ ");
+	print_auto_y(&x, &y, "	   |□|＼＼ 　∧--∧ ");
+	print_auto_y(&x, &y, "	   |口|　＼＼(   0ㅁ0) ");
+	print_auto_y(&x, &y, "	   |口|　　＼⊂ 　 つ ");
+	print_auto_y(&x, &y, "	   |口|　 　 ＼＼つつ＼ ");
+	print_auto_y(&x, &y, "	   |口|　　　　＼| 　＼| ");
+	print_auto_y(&x, &y, "     ------------------------------------------------");
 
 	gotoxy(56, 18);
 	printf("게임 시작");
@@ -258,14 +251,14 @@ void line(int x, int y)
 void start_game() {
 	system("cls");
 	gotoxy(62, 12);
-	printf("VS");
 	gotoxy(45, 9);
-	printf("게임을 진행할 팀 등록을 진행하십시오\n");
-	gotoxy(25, 12);
-	printf("첫번째 팀 이름입력 후 엔터> ");
-	scanf_s("%s", &t_name1, 20);
+	printf("원하는 모양을 선택하시오.");
+	gotoxy(45, 12);
+	printf("○ ");
+	gotoxy(56, 12);
+	printf("□");
 	gotoxy(68, 12);
-	printf("두번째 팀 이름입력 후 엔터> ");
+	printf("△");
 	scanf_s("%s", &t_name2, 20);
 	// 이름 입력 후 화면 지우기
 	system("cls");
