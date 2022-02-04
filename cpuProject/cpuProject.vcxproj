@@ -25,6 +25,7 @@
     <ClCompile Include="pushpull.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dalgona.h" />
     <ClInclude Include="modules.h" />
     <ClInclude Include="pushpull.h" />
   </ItemGroup>

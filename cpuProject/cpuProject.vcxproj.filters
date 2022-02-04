@@ -35,6 +35,9 @@
     <ClInclude Include="modules.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="dalgona.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\..\yoonkyoungchoi\CPU_Kingdom\CPU_Kingdom\push.wav">

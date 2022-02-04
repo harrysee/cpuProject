@@ -3,8 +3,10 @@
 #include <Windows.h>//windows console api 헤더
 #include <time.h>	//랜덤 시드용 time 함수 헤더
 #include <conio.h>	//gotoxyD에서 사용할 api 헤더
+#include "dalgona.h"
 
-#define FIELD_WIDTH 50	//필드가로길이
+#define MAGIC_KEY 224
+#define FIELD_WIDTH 65	//필드가로길이
 #define FIELD_HEIGHT 25	//필드세로길이
 #define LEFT 75			//키보드 좌 화살표의 char값
 #define RIGHT 77		//키보드 우
@@ -13,9 +15,21 @@
 #define ITEM_MAX 2		//화면에 표시되는 아이템개수
 #define ITEM_GOLD 101	//골드 아이템 인디케이터
 #define ITEM_EXP 102	//경험치 아이템 인디케이터
-#define LEFT_MARGIN 30	//화면왼쪽마진(공백)
+#define LEFT_MARGIN 25	//화면왼쪽마진(공백)
 #define TOP_MARGIN 3	//화면 상단마진(공백)
 #define DELAYTIME 200	//Sleep함수에 들어갈 x/1000 초
+
+int inputkey = 0;
+
+void printstart();
+void playgame();
+void selectShape();
+
+enum MENU
+{
+	GAMESTART = 0,
+	EXIT
+};
 
 //지렁이를 구현할 이중연결리스트 구조체
 #pragma pack(push,1)
@@ -47,6 +61,156 @@ void gotoxyD(int x, int y)
 	Pos.Y = y + TOP_MARGIN;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
+// 첫화면 시작종료 선택 커서 함수
+enum MENU gamemenu() {
+	int y = 0;
+	while (1) {
+		printstart();
+
+		if (y <= 0)
+		{
+			y = 0;
+		}
+		else if (y >= 4)
+		{
+			y = 2;
+		}
+
+		gotoxy(53, 18 + y);
+		printf(">");
+
+		inputkey = _getch();
+
+		if (inputkey == MAGIC_KEY)
+		{
+			switch (_getch())
+			{
+			case UP:
+				gotoxy(53, 18 + y);
+				printf("  ");
+				y = y - 2;
+				break;
+			case DOWN:
+				gotoxy(53, 18 + y);
+				printf("  ");
+				y = y + 2;
+				break;
+			}
+		}
+		else if (inputkey == 13)
+		{
+			switch (y)
+			{
+			case 0:
+				return GAMESTART;
+			case 2:
+				return EXIT;
+			}
+		}
+	}
+}
+
+// 게임 시작화면 
+void printstart() {
+	int x = 40;
+	int y = 11;
+	system("cls");
+	gotoxy(36, 5);
+	printf("               △□○ 줄다리기 △□○");
+	gotoxy(36, 7);
+	printf("★          이번게임은 줄다리기 입니다          ★");
+	gotoxy(36, 9);
+	printf("★ A와 L키 연타로 눌러서 우승한 팀은 통과입니다 ★");
+	gotoxy(36, 11);
+	printf("★       그럼 시작하기 눌러서 입장하십시오      ★");
+	gotoxy(36, 13);
+	printf("★               게임종료 = 메뉴화면            ★");
+	gotoxy(36, 15);
+	printf("△□○  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★  △□○");
+
+	gotoxy(40, 17);
+	printf("●");
+	gotoxy(39, 18);
+	printf("＼|/");
+	gotoxy(40, 19);
+	printf("456");
+	gotoxy(40, 20);
+	printf("/＼");
+
+	x = 6;
+	y = 5;
+	print_auto_y(&x, &y, " ./＼＿／＼");
+	print_auto_y(&x, &y, " ／ _/　_ ＼");
+	print_auto_y(&x, &y, " |　━　 ━　i");
+	print_auto_y(&x, &y, " ＼= (_人_) ");
+	print_auto_y(&x, &y, "   ========");
+	print_auto_y(&x, &y, "  ／￣￣⌒＼/⌒)―――――――");
+	print_auto_y(&x, &y, ". /　　　　＿／　");
+	print_auto_y(&x, &y, ". |　　　＼");
+	print_auto_y(&x, &y, "  ＼ ＼_　＼");
+	print_auto_y(&x, &y, "   ＼/.＼_/");
+
+	x = 90;
+	y = 10;
+	print_auto_y(&x, &y, "             ／⌒＼");
+	print_auto_y(&x, &y, "           ／　   ＼");
+	print_auto_y(&x, &y, "	    /　　　  ＼");
+	print_auto_y(&x, &y, "	   /　　　　   ＼");
+	print_auto_y(&x, &y, "	   ( / 　 　    )");
+	print_auto_y(&x, &y, "	   f  　       ｜");
+	print_auto_y(&x, &y, "	   | ●　　●　｜");
+	print_auto_y(&x, &y, "	   |　 ▽　　　｜");
+	print_auto_y(&x, &y, "         |＿＿ 　 　ノ");
+	print_auto_y(&x, &y, "	   丁丁丁丁丁￣l＼");
+	print_auto_y(&x, &y, "	   く(_(_(＿L＿)ノ");
+
+	gotoxy(77, 17);
+	printf(" ●");
+	gotoxy(76, 18);
+	printf("＼|/");
+	gotoxy(77, 19);
+	printf("001");
+	gotoxy(77, 20);
+	printf("/＼");
+
+	gotoxy(56, 18);
+	printf("게임 시작");
+
+	gotoxy(56, 20);
+	printf("게임 종료");
+
+	print_by_name("전유리 고에스더 김민주");
+}
+
+// 게임시작 시작종료처리 함수
+void dalgona() {
+	system("cls");
+	//PlaySound(TEXT("push.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+	while (1) {
+		switch (gamemenu()) {
+		case GAMESTART:
+			selectShape();
+			break;
+
+		case EXIT:
+			//PlaySound(NULL, 0, 0);
+			main();
+			break;
+		}
+	}
+}
+
+// 게임 모양선택 함수
+void selectShape() {
+	system("cls");
+	// while
+		// 선택모양나열
+		// 좌우키보드 조건 - 모양선택 바꿈(변수변경)
+		// ESC 조건 - 종료
+		// Enter 조건- 게임시작
+	playgame();
+}
+
 
 //게임영역출력
 void PrintField()
@@ -118,7 +282,7 @@ void PrintWorm(pWORM wormTailNode, pWORM wormHeadNode)
 	while (curr != wormHeadNode)
 	{
 		gotoxyD(curr->x, curr->y);
-		printf("O");
+		printf("●");
 		curr = curr->next;
 	}
 }
@@ -298,27 +462,12 @@ void FreeItemList(pITEM itemNode)
 	}
 }
 
-//실행시 테스트용으로 만들어 놓은 아이템 생성 리스트 출력함수
-/*
-void PrintItemList(pITEM itemNode)
-{
-	pITEM curr;
-	curr = itemNode->next;
-	gotoxyD( -LEFT_MARGIN, 2);
-	while (curr != NULL)
-	{
-		printf("아이템번호 : %d\n", curr->itemNo);
-		curr = curr->next;
-	}
-}
-*/
-int dalgona()
+void playgame()
 {
 	pWORM wormHeadNode = malloc(sizeof(WORM));//이중연결리스트 헤드노드
 	pWORM wormTailNode = malloc(sizeof(WORM));//이중연결리스트 테일노드
-	pWORM addWorm = malloc(sizeof(WORM));//첫번째 웜몸통
+	pWORM addWorm = malloc(sizeof(WORM));//첫번째 웜몸통 
 	pITEM itemNode = malloc(sizeof(ITEM));//아이템용 단일 연결리스트
-
 
 	wormHeadNode->next = NULL;
 	wormHeadNode->before = addWorm;
@@ -401,7 +550,6 @@ int dalgona()
 			printf("벽에 부딛혔습니다. GAME OVER");
 			FreeWormList(wormTailNode);
 			FreeItemList(itemNode);
-			return 0;
 		}
 
 		//아이템을 생성
@@ -427,6 +575,4 @@ int dalgona()
 
 	FreeWormList(wormTailNode);
 	FreeItemList(itemNode);
-
-	return 0;
 }
