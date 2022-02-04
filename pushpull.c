@@ -61,17 +61,17 @@ void pushpull() {
 // 게임 메인화면 함수
 void main_show() {
 	system("cls");
-	gotoxy(36, 5);
+	gotoxy(34, 5);
 	printf("△￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣○");
-	gotoxy(36, 7);
-	printf("|                  달고나게임                        |");
-	gotoxy(36, 9); 
+	gotoxy(34, 7);
+	printf("|                     달고나게임                     |");
+	gotoxy(34, 9); 
 	printf("|    각자 자신이 원하는 모양 중 하나를 선택합니다    |");
-	gotoxy(36, 11);
-	printf("|    먹이를 먹으면서 제한시간 안에 살아가면 됩니다   |");
-	gotoxy(36, 13);
+	gotoxy(34, 11);
+	printf("|     먹이를 먹으며 제한시간 안에 살아가면 됩니다    |");
+	gotoxy(34, 13);
 	printf("|      먹이를 다 먹지못하면 끝나는 게임입니다        |");
-	gotoxy(36, 15);
+	gotoxy(34, 15);
 	printf("□＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿☆");
 
 	x = 100;
