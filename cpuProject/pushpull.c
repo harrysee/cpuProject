@@ -72,7 +72,7 @@ void main_show() {
 	gotoxy(36, 13);
 	printf("★               게임종료 = 메뉴화면            ★");
 	gotoxy(36, 15);
-	printf("△□○  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★  △□○");
+	printf("△□○  ★★★★★★★★★★★★★★★★★★ △□○");
 
 	gotoxy(40, 17);
 	printf("●");
@@ -184,10 +184,10 @@ enum MENU game() {
 void line(int x, int y)
 {
 	system("cls");
-	int i, line[41] = { 0 };
-	line[20] = 1;
+	int i, line[21] = { 0 };
+	line[10] = 1;
 	line[4] = 2;
-	line[36] = 2;
+	line[16] = 2;
 	gotoxy(31, 13);
 	for (i = 0; i < 78; i++)
 		printf(" ");
@@ -199,36 +199,36 @@ void line(int x, int y)
 
 	int peple = 0;
 	gotoxy(x - 16, 10);
-	printf("● ● ● ●  ●  ●  ● ●");
+	printf("● ● ●  ●  ●  ● ");
 	gotoxy(x - 16, 11);
-	printf("＼□□＼□＼□□□＼□□＼□□＼");
+	printf("＼□＼□＼□□□＼□□＼□□＼");
 	gotoxy(x - 15, 12);
-	printf("| | |  |  | | | | |");
+	printf("| |  |  | | | | | |");
 	gotoxy(x - 16, 13);
 	printf("/＼/＼/＼/＼/＼/＼/＼");
 
 	gotoxy(x + 37, 10);
-	printf("  ●  ●  ●  ● ● ●  ● ●");
+	printf(" ●  ●  ●  ● ● ●");
 	gotoxy(x + 34, 11);
-	printf("/□/□/□□□/|□/□□□/□/□/□/");
+	printf("/□/□/□□□/|□/□□/");
 	gotoxy(x + 37, 12);
 	printf(" | | | |  |  | | | |");
 	gotoxy(x + 37, 13);
 	printf("/＼/＼/＼/＼/＼/＼/＼");
 
 	gotoxy(0, 14);
-	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■");
 	gotoxy(77, 14);
-	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+	printf("■■■■■■■■■■■■■■■■■■■■■");
 
 	gotoxy(40, 24);
 	printf("● ＼__ /_          /●/__-_       ＼●_   _/  (");
-	gotoxy(20, 25);
-	printf("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
+	gotoxy(28, 25);
+	printf("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
 
 	// x,y함수로 line그려줌 x =40, y = 11
 	gotoxy(x, 11);
-	for (i = 0; i < 41; i++)
+	for (i = 0; i < 21; i++)
 		if (line[i] == 0)
 			printf("□");
 		else if (line[i] == 1)
@@ -287,7 +287,7 @@ void game_fun() {
 			x -= 2;
 			line(x, y);
 			Sleep(100);
-			if (x == 24) {
+			if (x == 28) {
 				gotoxy(78, 14);
 				printf("                                         ");
 				Sleep(500);
@@ -307,7 +307,7 @@ void game_fun() {
 			x += 2;
 			line(x, y);
 			Sleep(100);
-			if (x == 56) {
+			if (x == 52) {
 				gotoxy(0, 14);
 				printf("                                              ");
 				Sleep(500);
