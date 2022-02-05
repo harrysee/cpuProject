@@ -119,7 +119,7 @@ void printstart() {
 	gotoxy(34, 5);
 	printf("△￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣○");
 	gotoxy(34, 7);
-	printf("|                     달고나게임                     |");
+	printf("|                   설탕 뽑기 게임                   |");
 	gotoxy(34, 9);
 	printf("|    각자 자신이 원하는 모양 중 하나를 선택합니다    |");
 	gotoxy(34, 11);
@@ -201,21 +201,23 @@ void printShape() {
 	int x = 10;
 	int y = 20;
 	system("cls");
-	gotoxy(38, 8);
-	printf("_원하는 모양 앞으로 줄을 서주시기바랍니다._ ");
+	gotoxy(55, 5);
+	printf("  ○△□ ");
+	gotoxy(38, 7);
+	printf("_지금 즉시 하나를 선택해 이동하시기바랍니다._ ");
 	//gotoxy(45, 9);
 	//printf("지금부터 게임을 시작하겠습니다");
-	gotoxy(35, 9);
-	printf("엔터를 누르면 타이머와 함께 게임을 시작하겠습니다.");
-	gotoxy(30, 10);
-	printf("○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ");
+	gotoxy(37, 9);
+	printf("엔터를 누르면 타이머와 함께 게임을 시작합니다.");
+	gotoxy(34, 11);
+	printf("○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ");
 
 
-	print_auto_y(&x, &y, "            ○ ○ ○    ");
-	print_auto_y(&x, &y, "          ○        ○");
-	print_auto_y(&x, &y, "	  ○         ○");
-	print_auto_y(&x, &y, "	   ○        ○");
-	print_auto_y(&x, &y, "	     ○ ○ ○   ");
+	print_auto_y(&x, &y, "            ○○○    ");
+	print_auto_y(&x, &y, "          ○       ○");
+	print_auto_y(&x, &y, "	   ○         ○");
+	print_auto_y(&x, &y, "	    ○        ○");
+	print_auto_y(&x, &y, "	      ○ ○ ○   ");
 	print_auto_y(&x, &y, "	             ");
 	print_auto_y(&x, &y, "	    ");
 	print_auto_y(&x, &y, "	  ");
@@ -262,9 +264,9 @@ void selectShape() {
 		gotoxy(kx, ky);
 		printf("*o*");
 		gotoxy(kx, ky+1);
-		printf("/|\\");
+		printf("/|＼");
 		gotoxy(kx, ky+2);
-		printf("./\\.");
+		printf("./＼.");
 
 		inputkey = _getch();
 		if (inputkey == MAGIC_KEY) // 방향키
@@ -379,7 +381,7 @@ void PrintWorm(pWORM wormTailNode, pWORM wormHeadNode)
 	while (curr != wormHeadNode)
 	{
 		gotoxyD(curr->x, curr->y);
-		printf("●");
+		printf("o");
 		curr = curr->next;
 	}
 }
@@ -394,7 +396,7 @@ void PrintScore(int score)
 	gotoxyD(FIELD_WIDTH + 3, 7);
 	printf("조작은 화살표키로");
 	gotoxyD(FIELD_WIDTH + 3, 9);
-	printf("mode : %d -",mode);
+	printf("mode : %d ",mode);
 }
 
 //웜이 지나간 자리 지우기
