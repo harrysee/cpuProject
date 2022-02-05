@@ -20,6 +20,7 @@
 #define DELAYTIME 200	//Sleep함수에 들어갈 x/1000 초
 
 int inputkey = 0;
+int mode = 1;	// 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
 
 void printstart();
 void playgame();
@@ -196,14 +197,20 @@ void dalgona() {
 }
 
 // 게임 모양선택 함수
-void selectShape() {
-	
-	system("cls");
-
-	gotoxy(50, 10);
-	printf("모양을 선택해 주세요");
-	int x = 8;
+void printShape() {
+	int x = 10;
 	int y = 20;
+	system("cls");
+	gotoxy(38, 8);
+	printf("_원하는 모양 앞으로 줄을 서주시기바랍니다._ ");
+	//gotoxy(45, 9);
+	//printf("지금부터 게임을 시작하겠습니다");
+	gotoxy(35, 9);
+	printf("엔터를 누르면 타이머와 함께 게임을 시작하겠습니다.");
+	gotoxy(30, 10);
+	printf("○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ");
+
+
 	print_auto_y(&x, &y, "            ○ ○ ○    ");
 	print_auto_y(&x, &y, "          ○        ○");
 	print_auto_y(&x, &y, "	  ○         ○");
@@ -237,13 +244,68 @@ void selectShape() {
 	print_auto_y(&x, &y, "	       □□□□□□□□");
 	print_auto_y(&x, &y, "	  ");
 	print_auto_y(&x, &y, "     ");
-	// while
-		// 선택모양나열
-		// 좌우키보드 조건 - 모양선택 바꿈(변수변경)
-		// ESC 조건 - 종료
-		// Enter 조건- 게임시작
-	//playgame();
-	char kk = _getch();
+}
+void selectShape() {
+	system("cls");
+	int kx = 24;
+	int ky = 15;
+	int gap = 30;
+
+	while(1){
+		printShape();
+		if (kx > 24 + gap * 2) {
+			kx = 24 + gap * 2;
+		}
+		else if (kx < 20 ) {
+			kx = 20;
+		}
+		gotoxy(kx, ky);
+		printf("*o*");
+		gotoxy(kx, ky+1);
+		printf("/|\\");
+		gotoxy(kx, ky+2);
+		printf("./\\.");
+
+		inputkey = _getch();
+		if (inputkey == MAGIC_KEY) // 방향키
+		{
+			switch (_getch())
+			{
+			case LEFT:
+				gotoxy(kx, ky);
+				printf("  ");
+				gotoxy(kx, ky + 1);
+				printf("    ");
+				gotoxy(kx, ky + 2);
+				printf("   ");
+				kx -= gap;
+				break;
+			case RIGHT:
+				gotoxy(kx, ky);
+				printf("  ");
+				gotoxy(kx, ky + 1);
+				printf("    ");
+				gotoxy(kx, ky + 2);
+				printf("   ");
+				kx += gap;
+				break;
+			}
+		}
+		else if (inputkey == 13)	// 엔터
+		{
+			switch (kx)
+			{
+			case 24:
+				mode = 1; break;
+			case 24+30:
+				mode = 2; break;
+			case 24+30*2:
+				mode = 3; break;
+			}
+			playgame();
+			return 0;
+		}
+	}
 }
 
 
@@ -331,6 +393,8 @@ void PrintScore(int score)
 	printf("종료하려면 Q를 누르세요");
 	gotoxyD(FIELD_WIDTH + 3, 7);
 	printf("조작은 화살표키로");
+	gotoxyD(FIELD_WIDTH + 3, 9);
+	printf("mode : %d -",mode);
 }
 
 //웜이 지나간 자리 지우기
