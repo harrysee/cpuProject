@@ -470,10 +470,22 @@ void CreateItem(pITEM itemNode, int* itemNo) {
 void PrintItem(pITEM itemNode)
 {
 	pITEM curr = itemNode->next;
-	while (curr != NULL)
+	while (curr != NULL && mode == 1)
 	{
 		gotoxyD(curr->x, curr->y);
-		printf("@");
+		printf("¡Û");
+		curr = curr->next;
+	}
+	while (curr != NULL && mode == 2)
+	{
+		gotoxyD(curr->x, curr->y);
+		printf("¡â");
+		curr = curr->next;
+	}
+	while (curr != NULL && mode == 3)
+	{
+		gotoxyD(curr->x, curr->y);
+		printf("¡à");
 		curr = curr->next;
 	}
 }
