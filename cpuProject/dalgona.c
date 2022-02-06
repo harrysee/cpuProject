@@ -18,13 +18,17 @@
 #define LEFT_MARGIN 25	//화면왼쪽마진(공백)
 #define TOP_MARGIN 3	//화면 상단마진(공백)
 #define DELAYTIME 200	//Sleep함수에 들어갈 x/1000 초
+#define TIMER 30.0	//Sleep함수에 들어갈 x/1000 초
 
 int inputkey = 0;
 int mode = 1;	// 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
+clock_t start;	// 타이머 게임시작시간 저장
+double limit = 0;	// 남은 시간
 
 void printstart();
 void playgame();
 void selectShape();
+void timerlimit();
 
 enum MENU
 {
@@ -310,6 +314,13 @@ void selectShape() {
 	}
 }
 
+void timerlimit() {
+	clock_t end = clock();
+	double time = ((double)(end-start)) / CLOCKS_PER_SEC; //초단위 변환
+	limit = TIMER - time;
+	gotoxy(FIELD_WIDTH / 2+20, 1);
+	printf("타이머 : %0.3lf\n",limit ); //소수점 셋째 자리까지
+}
 
 //게임영역출력
 void PrintField()
@@ -595,6 +606,7 @@ void playgame()
 	char key;				//키입력받을 변수
 	int delItemNo = 0;		//지울아이템넘버를 받을 변수초기화
 	int itemNo = 10000;//아이템의 최초번호
+	start = clock();	// 시작 시간
 
 	//아이템 생성 위치 난수 시드
 	srand((unsigned int)time(NULL));
@@ -609,7 +621,7 @@ void playgame()
 		//gotoxyD(-LEFT_MARGIN, 0);
 		//printf("먹은 아이템 : %d\n",delItemNo);
 		//PrintItemList(itemNode);
-
+		timerlimit();
 		if (_kbhit() != 0)
 		{
 
@@ -643,12 +655,21 @@ void playgame()
 		//웜 한칸씩 움직이기
 		MoveWorm(wormTailNode, wormHeadNode);
 
-		//벽에 부딛히면 게임오버
-		if (wormHeadPointer->x == 0 || wormHeadPointer->x == FIELD_WIDTH || wormHeadPointer->y == 0 || wormHeadPointer->y == FIELD_HEIGHT)
+		//벽에 부딛히면 종료
+		if (wormHeadPointer->x == 0 || wormHeadPointer->x == FIELD_WIDTH || wormHeadPointer->y == 0 || wormHeadPointer->y == FIELD_HEIGHT )
 		{
 			system("cls");
 			gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
 			printf("벽에 부딛혔습니다. GAME OVER");
+			FreeWormList(wormTailNode);
+			FreeItemList(itemNode);
+		}
+		
+		//시간 다돼면 종료
+		if (limit <= 0.0) {
+			system("cls");
+			gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+			printf("타임 아웃, 탈락입니다. YOUR DEAD");
 			FreeWormList(wormTailNode);
 			FreeItemList(itemNode);
 		}
@@ -672,6 +693,7 @@ void playgame()
 		PrintWorm(wormTailNode, wormHeadNode);
 		PrintScore(score);
 		Sleep(DELAYTIME);
+
 	}
 
 	FreeWormList(wormTailNode);
