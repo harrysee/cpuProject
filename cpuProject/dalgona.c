@@ -18,17 +18,14 @@
 #define LEFT_MARGIN 25	//화면왼쪽마진(공백)
 #define TOP_MARGIN 3	//화면 상단마진(공백)
 #define DELAYTIME 200	//Sleep함수에 들어갈 x/1000 초
-#define TIMER 30.0	//Sleep함수에 들어갈 x/1000 초
+
 
 int inputkey = 0;
 int mode = 1;	// 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
-clock_t start;	// 타이머 게임시작시간 저장
-double limit = 0;	// 남은 시간
 
 void printstart();
 void playgame();
 void selectShape();
-void timerlimit();
 
 enum MENU
 {
@@ -205,23 +202,23 @@ void printShape() {
 	int x = 10;
 	int y = 20;
 	system("cls");
-	gotoxy(55, 5);
-	printf("  ○△□ ");
-	gotoxy(38, 7);
-	printf("_지금 즉시 하나를 선택해 이동하시기바랍니다._ ");
+	gotoxy(34, 5);
+	printf("△￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣  ￣○");
+	gotoxy(34, 7);
+	printf("|     지금 즉시 하나를 선택해 이동하시기바랍니다.    |");
 	//gotoxy(45, 9);
 	//printf("지금부터 게임을 시작하겠습니다");
-	gotoxy(37, 9);
-	printf("엔터를 누르면 타이머와 함께 게임을 시작합니다.");
+	gotoxy(34, 9);
+	printf("|    엔터를 누르면 타이머와 함께 게임을 시작합니다.  |");
 	gotoxy(34, 11);
-	printf("○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ○△□ ");
+	printf("□＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿  ＿☆");
 
 
-	print_auto_y(&x, &y, "            ○○○    ");
-	print_auto_y(&x, &y, "          ○       ○");
-	print_auto_y(&x, &y, "	   ○         ○");
+	print_auto_y(&x, &y, "            ○○○○    ");
+	print_auto_y(&x, &y, "          ○        ○");
+	print_auto_y(&x, &y, "	   ○          ○");
 	print_auto_y(&x, &y, "	    ○        ○");
-	print_auto_y(&x, &y, "	      ○ ○ ○   ");
+	print_auto_y(&x, &y, "	      ○○○○   ");
 	print_auto_y(&x, &y, "	             ");
 	print_auto_y(&x, &y, "	    ");
 	print_auto_y(&x, &y, "	  ");
@@ -230,10 +227,10 @@ void printShape() {
 	x = 40;
 	y = 20;
 	print_auto_y(&x, &y, "             △     ");
-	print_auto_y(&x, &y, "           △  △");
-	print_auto_y(&x, &y, "	  △     △");
-	print_auto_y(&x, &y, "	 △        △");
-	print_auto_y(&x, &y, "	△ △ △ △ △   ");
+	print_auto_y(&x, &y, "           △   △");
+	print_auto_y(&x, &y, "	  △      △");
+	print_auto_y(&x, &y, "	 △         △");
+	print_auto_y(&x, &y, "	△ △ △ △  △   ");
 	print_auto_y(&x, &y, "	            ");
 	print_auto_y(&x, &y, "	    ");
 	print_auto_y(&x, &y, "	  ");
@@ -241,13 +238,12 @@ void printShape() {
 
 	x = 70;
 	y = 20;
-	print_auto_y(&x, &y, "         □□□□□□□□    ");
-	print_auto_y(&x, &y, "         □            □");
-	print_auto_y(&x, &y, "	       □            □");
-	print_auto_y(&x, &y, "	       □            □");
-	print_auto_y(&x, &y, "	       □            □   ");
-	print_auto_y(&x, &y, "	       □            □    ");
-	print_auto_y(&x, &y, "	       □□□□□□□□");
+	print_auto_y(&x, &y, "         □□□□□□□");
+	print_auto_y(&x, &y, "         □          □");
+	print_auto_y(&x, &y, "	       □          □");
+	print_auto_y(&x, &y, "	       □          □");
+	print_auto_y(&x, &y, "	       □          □   ");
+	print_auto_y(&x, &y, "	       □□□□□□□    ");
 	print_auto_y(&x, &y, "	  ");
 	print_auto_y(&x, &y, "     ");
 }
@@ -257,20 +253,22 @@ void selectShape() {
 	int ky = 15;
 	int gap = 30;
 
-	while(1){
+	while (1) {
 		printShape();
 		if (kx > 24 + gap * 2) {
 			kx = 24 + gap * 2;
 		}
-		else if (kx < 20 ) {
+		else if (kx < 20) {
 			kx = 20;
 		}
 		gotoxy(kx, ky);
-		printf("*o*");
-		gotoxy(kx, ky+1);
-		printf("/|＼");
-		gotoxy(kx, ky+2);
-		printf("./＼.");
+		printf("　∧,,∧");
+		gotoxy(kx, ky + 1);
+		printf("(-＞ㅁ0-)");
+		gotoxy(kx, ky + 2);
+		printf("　(O O)");
+		gotoxy(kx, ky + 3);
+		printf("　 T-T");
 
 		inputkey = _getch();
 		if (inputkey == MAGIC_KEY) // 방향키
@@ -303,9 +301,9 @@ void selectShape() {
 			{
 			case 24:
 				mode = 1; break;
-			case 24+30:
+			case 24 + 30:
 				mode = 2; break;
-			case 24+30*2:
+			case 24 + 30 * 2:
 				mode = 3; break;
 			}
 			playgame();
@@ -314,13 +312,6 @@ void selectShape() {
 	}
 }
 
-void timerlimit() {
-	clock_t end = clock();
-	double time = ((double)(end-start)) / CLOCKS_PER_SEC; //초단위 변환
-	limit = TIMER - time;
-	gotoxy(FIELD_WIDTH / 2+20, 1);
-	printf("타이머 : %0.3lf\n",limit ); //소수점 셋째 자리까지
-}
 
 //게임영역출력
 void PrintField()
@@ -407,13 +398,18 @@ void PrintScore(int score)
 	gotoxyD(FIELD_WIDTH + 3, 7);
 	printf("조작은 화살표키로");
 	gotoxyD(FIELD_WIDTH + 3, 9);
-	printf("mode : %d ",mode);
+	printf("mode : %d ", mode);
 }
 
 //웜이 지나간 자리 지우기
 void ClearWorm(int x, int y)
 {
-	gotoxyD(x, y);
+	
+	if (x == x && y == y) {
+		gotoxyD(x, y);
+		printf(" ");
+	}
+
 	printf(" ");
 }
 
@@ -480,11 +476,24 @@ void CreateItem(pITEM itemNode, int* itemNo) {
 void PrintItem(pITEM itemNode)
 {
 	pITEM curr = itemNode->next;
-	while (curr != NULL)
+	while (curr != NULL && mode == 1)
 	{
 		gotoxyD(curr->x, curr->y);
-		printf("@");
+		printf("○");
 		curr = curr->next;
+	}
+	while (curr != NULL && mode == 2)
+	{
+		gotoxyD(curr->x, curr->y);
+		printf("△");
+		curr = curr->next;
+	}
+	while (curr != NULL && mode == 3)
+	{
+		gotoxyD(curr->x, curr->y);
+		printf("□");
+		curr = curr->next;
+		//ClearWorm(x,y);
 	}
 }
 
@@ -606,7 +615,6 @@ void playgame()
 	char key;				//키입력받을 변수
 	int delItemNo = 0;		//지울아이템넘버를 받을 변수초기화
 	int itemNo = 10000;//아이템의 최초번호
-	start = clock();	// 시작 시간
 
 	//아이템 생성 위치 난수 시드
 	srand((unsigned int)time(NULL));
@@ -621,7 +629,7 @@ void playgame()
 		//gotoxyD(-LEFT_MARGIN, 0);
 		//printf("먹은 아이템 : %d\n",delItemNo);
 		//PrintItemList(itemNode);
-		timerlimit();
+
 		if (_kbhit() != 0)
 		{
 
@@ -655,21 +663,12 @@ void playgame()
 		//웜 한칸씩 움직이기
 		MoveWorm(wormTailNode, wormHeadNode);
 
-		//벽에 부딛히면 종료
-		if (wormHeadPointer->x == 0 || wormHeadPointer->x == FIELD_WIDTH || wormHeadPointer->y == 0 || wormHeadPointer->y == FIELD_HEIGHT )
+		//벽에 부딛히면 게임오버
+		if (wormHeadPointer->x == 0 || wormHeadPointer->x == FIELD_WIDTH || wormHeadPointer->y == 0 || wormHeadPointer->y == FIELD_HEIGHT)
 		{
 			system("cls");
 			gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
 			printf("벽에 부딛혔습니다. GAME OVER");
-			FreeWormList(wormTailNode);
-			FreeItemList(itemNode);
-		}
-		
-		//시간 다돼면 종료
-		if (limit <= 0.0) {
-			system("cls");
-			gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-			printf("타임 아웃, 탈락입니다. YOUR DEAD");
 			FreeWormList(wormTailNode);
 			FreeItemList(itemNode);
 		}
@@ -693,7 +692,6 @@ void playgame()
 		PrintWorm(wormTailNode, wormHeadNode);
 		PrintScore(score);
 		Sleep(DELAYTIME);
-
 	}
 
 	FreeWormList(wormTailNode);
