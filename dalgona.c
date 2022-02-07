@@ -19,12 +19,18 @@
 #define TOP_MARGIN 3	//화면 상단마진(공백)
 #define DELAYTIME 200	//Sleep함수에 들어갈 x/1000 초
 
+
 int inputkey = 0;
 int mode = 1;	// 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
 
 void printstart();
 void playgame();
 void selectShape();
+
+struct Point2D {
+	int x;
+	int y;
+};
 
 enum MENU
 {
@@ -252,19 +258,19 @@ void selectShape() {
 	int ky = 15;
 	int gap = 30;
 
-	while(1){
+	while (1) {
 		printShape();
 		if (kx > 24 + gap * 2) {
 			kx = 24 + gap * 2;
 		}
-		else if (kx < 20 ) {
+		else if (kx < 20) {
 			kx = 20;
 		}
 		gotoxy(kx, ky);
 		printf("　∧,,∧");
-		gotoxy(kx, ky+1);
+		gotoxy(kx, ky + 1);
 		printf("(-＞ㅁ0-)");
-		gotoxy(kx, ky+2);
+		gotoxy(kx, ky + 2);
 		printf("　(O O)");
 		gotoxy(kx, ky + 3);
 		printf("　 T-T");
@@ -300,9 +306,9 @@ void selectShape() {
 			{
 			case 24:
 				mode = 1; break;
-			case 24+30:
+			case 24 + 30:
 				mode = 2; break;
-			case 24+30*2:
+			case 24 + 30 * 2:
 				mode = 3; break;
 			}
 			playgame();
@@ -397,13 +403,18 @@ void PrintScore(int score)
 	gotoxyD(FIELD_WIDTH + 3, 7);
 	printf("조작은 화살표키로");
 	gotoxyD(FIELD_WIDTH + 3, 9);
-	printf("mode : %d ",mode);
+	printf("mode : %d ", mode);
 }
 
 //웜이 지나간 자리 지우기
 void ClearWorm(int x, int y)
 {
-	gotoxyD(x, y);
+	
+	if (x == x && y == y) {
+		gotoxyD(x, y);
+		printf(" ");
+	}
+
 	printf(" ");
 }
 
@@ -469,24 +480,28 @@ void CreateItem(pITEM itemNode, int* itemNo) {
 //아이템 화면에 출력
 void PrintItem(pITEM itemNode)
 {
+	struct Point2D p1[3] = { {.x = "○", .y = "○" }, {.x = "○", .y = "○" }, {.x = "○", .y = "○" } };
+	struct Point2D p2[3] = { {.x = "△", .y = "△" }, {.x = "△", .y = "△" }, {.x = "△", .y = "△" } };
+	struct Point2D p3[3] = { {.x = "□", .y = "□" }, {.x = "□", .y = "□" }, {.x = "□", .y = "□" } };
 	pITEM curr = itemNode->next;
 	while (curr != NULL && mode == 1)
 	{
 		gotoxyD(curr->x, curr->y);
-		printf("○");
+		printf("%s %s %s %s", p1[0].x, p1[0].y, p1[1].x, p1[1].y, p1[2].x, p1[2].y);
 		curr = curr->next;
 	}
 	while (curr != NULL && mode == 2)
 	{
 		gotoxyD(curr->x, curr->y);
-		printf("△");
+		printf("%s %s %s %s", p2[0].x, p2[0].y, p2[1].x, p2[1].y, p2[2].x, p2[2].y);
 		curr = curr->next;
 	}
 	while (curr != NULL && mode == 3)
 	{
 		gotoxyD(curr->x, curr->y);
-		printf("□");
+		printf("%s %s %s %s", p3[0].x, p3[0].y, p3[1].x, p3[1].y, p3[2].x, p3[2].y);
 		curr = curr->next;
+		//ClearWorm(x,y);
 	}
 }
 
