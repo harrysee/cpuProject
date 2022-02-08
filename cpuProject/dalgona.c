@@ -18,14 +18,17 @@
 #define LEFT_MARGIN 25	//화면왼쪽마진(공백)
 #define TOP_MARGIN 3	//화면 상단마진(공백)
 #define DELAYTIME 200	//Sleep함수에 들어갈 x/1000 초
-
+#define TIMER 30.0	//Sleep함수에 들어갈 x/1000 초
 
 int inputkey = 0;
 int mode = 1;	// 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
+clock_t start;	// 타이머 게임시작시간 저장
+double limit = TIMER;	// 남은 시간
 
 void printstart();
 void playgame();
 void selectShape();
+void timerlimit();
 
 enum MENU
 {
@@ -553,7 +556,7 @@ int CheckItemHit(pWORM wormHeadPointer, pITEM itemNode, int* delItemNo)
 	pITEM curr;
 	int nodeNo = 0;
 	curr = itemNode->next;
-	while (curr != NULL)
+	/*while (curr != NULL)
 	{
 		if (wormHeadPointer->x == curr->x && wormHeadPointer->y == curr->y)
 		{
@@ -565,7 +568,7 @@ int CheckItemHit(pWORM wormHeadPointer, pITEM itemNode, int* delItemNo)
 		}
 		nodeNo++;
 		curr = curr->next;
-	}
+	}*/
 	return 0;//아이템을 안만나면 0
 }
 
@@ -581,6 +584,14 @@ void FreeItemList(pITEM itemNode)
 		free(curr);
 		curr = temp;
 	}
+}
+// 타이머
+void timerlimit() {
+	clock_t end = clock();
+	double time = ((double)(end - start)) / CLOCKS_PER_SEC; //초단위 변환
+	limit = TIMER - time;
+	gotoxy(FIELD_WIDTH / 2 + 20, 1);
+	printf("타이머 : %0.3lf\n", limit); //소수점 셋째 자리까지
 }
 
 void playgame()
@@ -615,6 +626,7 @@ void playgame()
 	char key;				//키입력받을 변수
 	int delItemNo = 0;		//지울아이템넘버를 받을 변수초기화
 	int itemNo = 10000;//아이템의 최초번호
+	start = clock();	//시작 시간
 
 	//아이템 생성 위치 난수 시드
 	srand((unsigned int)time(NULL));
@@ -629,7 +641,7 @@ void playgame()
 		//gotoxyD(-LEFT_MARGIN, 0);
 		//printf("먹은 아이템 : %d\n",delItemNo);
 		//PrintItemList(itemNode);
-
+		timerlimit();
 		if (_kbhit() != 0)
 		{
 
@@ -673,6 +685,14 @@ void playgame()
 			FreeItemList(itemNode);
 		}
 
+		//시간 다돼면 종료
+		if (limit <= 0.0) {
+			system("cls");
+			gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+			printf("타임 아웃, 탈락입니다. YOUR DEAD");
+			FreeWormList(wormTailNode);
+			FreeItemList(itemNode);
+		}
 		//아이템을 생성
 		while (itemCounter < ITEM_MAX)
 		{
@@ -688,6 +708,7 @@ void playgame()
 			score += 100;
 			itemCounter--;
 		}
+
 		PrintItem(itemNode);
 		PrintWorm(wormTailNode, wormHeadNode);
 		PrintScore(score);
