@@ -27,6 +27,9 @@
     <ClCompile Include="dalgona.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="shape.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pushpull.h">

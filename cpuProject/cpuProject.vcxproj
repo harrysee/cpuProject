@@ -23,6 +23,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="modules.c" />
     <ClCompile Include="pushpull.c" />
+    <ClCompile Include="shape.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dalgona.h" />

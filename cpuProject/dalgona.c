@@ -24,6 +24,7 @@ int inputkey = 0;
 int mode = 1;	// 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
 clock_t start;	// 타이머 게임시작시간 저장
 double limit = TIMER;	// 남은 시간
+int shapes;		// 아이템 모양 담겨있는 배열
 
 void printstart();
 void playgame();
@@ -303,11 +304,17 @@ void selectShape() {
 			switch (kx)
 			{
 			case 24:
-				mode = 1; break;
+				mode = 1;
+				shapes = shape1();
+				break;
 			case 24 + 30:
-				mode = 2; break;
+				mode = 2; 
+				shapes = shape2();
+				break;
 			case 24 + 30 * 2:
-				mode = 3; break;
+				mode = 3;
+				shapes = shape3();
+				break;
 			}
 			playgame();
 			return 0;
@@ -479,7 +486,7 @@ void CreateItem(pITEM itemNode, int* itemNo) {
 void PrintItem(pITEM itemNode)
 {
 	pITEM curr = itemNode->next;
-	while (curr != NULL && mode == 1)
+	/*while (curr != NULL && mode == 1)
 	{
 		gotoxyD(curr->x, curr->y);
 		printf("○");
@@ -497,7 +504,7 @@ void PrintItem(pITEM itemNode)
 		printf("□");
 		curr = curr->next;
 		//ClearWorm(x,y);
-	}
+	}*/
 }
 
 //리스트에서 itemNo의 위치를 찾아서 카운터를 리턴
@@ -644,7 +651,6 @@ void playgame()
 		timerlimit();
 		if (_kbhit() != 0)
 		{
-
 			key = _getch();
 			if (key == 'q' || key == 'Q')
 			{
@@ -709,6 +715,7 @@ void playgame()
 			itemCounter--;
 		}
 
+	
 		PrintItem(itemNode);
 		PrintWorm(wormTailNode, wormHeadNode);
 		PrintScore(score);
