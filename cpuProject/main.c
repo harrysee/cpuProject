@@ -21,6 +21,6 @@ void set_console(void) {
 int main(void) {
 	set_console();
 	//pushpull();
-	//dalgona();
-	shape();
+	dalgona();
+	//shape();
 }

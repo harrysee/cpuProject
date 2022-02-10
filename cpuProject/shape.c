@@ -1,3 +1,9 @@
+int shape() {
+
+}
+int shape1();
+int shape2();
+int shape3();
 
 int shape1() {
 	int shapes[32][2] = { 0 };
