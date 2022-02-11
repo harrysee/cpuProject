@@ -1,12 +1,30 @@
+#include <stdio.h>
+void* shape1();
+void* shape2();
+void* shape3();
+int modeSize(int);
+
 int shape() {
+	int  s= modeSize(1);
+	int (*sh)[40] = (int(*)[40])shape1();
+	printf("%d",sh[0][0]);
 
 }
-int shape1();
-int shape2();
-int shape3();
 
-int shape1() {
-	int shapes[32][2] = { 0 };
+int modeSize(int mode) {
+	switch (mode)
+	{
+	case 1:
+		return 32;
+	case 2:
+		return 30;
+	default:
+		return 38;
+		break;
+	}
+}
+void *shape1() {
+	static int shapes[32][2] = { 0 };
 	shapes[0][0] = 20; shapes[0][1] = 2;
 	shapes[1][0] = 18; shapes[1][1] = 3;
 	shapes[2][0] = 60; shapes[2][1] = 3;
@@ -40,11 +58,11 @@ int shape1() {
 	shapes[30][0] = 60; shapes[30][1] = 17;
 	shapes[31][0] = 20; shapes[31][1] = 18;
 
-	return shapes;
+	return (void*)shapes;
 
 }
-int shape2() {
-	int shapes[30][2]= { 0 };
+void* shape2() {
+	static int shapes[30][2]= { 0 };
 	shapes[0][0] = 30; shapes[0][1] = 2;
 	shapes[1][0] = 28; shapes[1][1] = 3;
 	shapes[2][0] = 32; shapes[2][1] = 3;
@@ -75,11 +93,11 @@ int shape2() {
 	shapes[27][0] = 4; shapes[27][1] = 15;
 	shapes[28][0] = 56; shapes[28][1] = 15;
 	shapes[29][0] = 3; shapes[29][1] = 16;
-	return shapes;
+	return (void*) shapes;
 }
 
-int shape3() {
-	int shapes[38][2]= { 0 };
+void* shape3() {
+	static int shapes[38][2]= { 0 };
 	shapes[0][0] = 30; shapes[0][1] = 2;
 	shapes[1][0] = 30; shapes[1][1] = 3;
 	shapes[2][0] = 68; shapes[2][1] = 3;
@@ -119,5 +137,5 @@ int shape3() {
 	shapes[36][0] = 68; shapes[36][1] = 20;
 	shapes[37][0] = 30; shapes[37][1] = 21;
 
-	return shapes;
+	return (void*)shapes;
 }

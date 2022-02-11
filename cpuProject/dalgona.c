@@ -24,7 +24,7 @@ int inputkey = 0;
 int mode = 1;	// 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
 clock_t start;	// 타이머 게임시작시간 저장
 double limit = TIMER;	// 남은 시간
-int shapes;		// 아이템 모양 담겨있는 배열
+int(*shapes)[40];
 
 void printstart();
 void playgame();
@@ -304,16 +304,16 @@ void selectShape() {
 			switch (kx)
 			{
 			case 24:
-				mode = 1;
-				shapes = shape1();
+				mode = modeSize(1);
+				shapes = (int(*)[40])shape1();
 				break;
 			case 24 + 30:
-				mode = 2; 
-				shapes = shape2();
+				mode = modeSize(2);
+				shapes = (int(*)[40])shape2();
 				break;
 			case 24 + 30 * 2:
-				mode = 3;
-				shapes = shape3();
+				mode = modeSize(3);
+				shapes = (int(*)[40])shape3();
 				break;
 			}
 			playgame();
