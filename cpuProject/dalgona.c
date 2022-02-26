@@ -495,60 +495,67 @@ void PrintItem(pITEM itemNode)
         gotoxy(shapes[i][0], shapes[i][1]);
         printf("¡à");
         i++;
+        if (curr != NULL) {
+            gotoxy(shapes[i - 1][0], shapes[i - 1][1]);
+            printf(" ");
+
+        }
+        else {
+            gotoxy(shapes[i - 1][0], shapes[i - 1][1]);
+            printf(" ");
+        }
         if (i == mode) {
             break;
         }
     }
-       /*
-       while (1) {
+    /*
+    while (1) {
+        gotoxy(shapes[i][0], shapes[i][1]);
+        printf("%d", shapes[i]);
+        printf("¡Û");
+        printf("\n");
+        i++;
+        if (i == mode) {
+            break;
+        }
+    }*/
 
-
-           gotoxy(shapes[i][0], shapes[i][1]);
-           printf("%d", shapes[i]);
-           printf("¡Û");
-           printf("\n");
-           i++;
-           if (i == mode) {
-               break;
-           }
-       }*/
-       
     while (curr != NULL && mode == 30)
     {
-       //gotoxyD(curr->x, curr->y);
-      // printf("¡â");
-       
-       curr = curr->next;
-       int i = 0;
-       while (1) {
+        //gotoxyD(curr->x, curr->y);
+       // printf("¡â");
+
+        curr = curr->next;
+        int i = 0;
+        while (1) {
 
 
-           gotoxy(shapes[i][0], shapes[i][1]);
-           //printf("%d", shapes[i]);
-           printf("¡â\n");
-           i++;
-           if (i == mode) {
-               break;
-           }
-       }
+            gotoxy(shapes[i][0], shapes[i][1]);
+            //printf("%d", shapes[i]);
+            printf("¡â\n");
+            i++;
+            if (i == mode) {
+                break;
+            }
+        }
     }
     while (curr != NULL && mode == 38)
     {
-      // gotoxyD(curr->x, curr->y);
-       //printf("¡à");
-       curr = curr->next;
-       int i = 0;
-       while (1) {
+        // gotoxyD(curr->x, curr->y);
+         //printf("¡à");
+        curr = curr->next;
+        int i = 0;
+        while (1) {
 
 
-           gotoxy(shapes[i][0], shapes[i][1]);
-           printf("¡à");
-           i++;
-          if (i == mode) {
-               break;
-           }
-       }
-       //ClearWorm(x,y);
+            gotoxy(shapes[i][0], shapes[i][1]);
+            printf("¡à");
+            i++;
+            if (i == mode) {
+                break;
+            }
+        }
+        //ClearWorm(x,y);
     }
 }
 
