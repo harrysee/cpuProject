@@ -316,6 +316,10 @@ void selectShape() {
                 shapes = shape3();
                 break;
             }
+            gotoxy(0, 0);
+            for (int i = 0; i < 4; i++) {
+                printf("%d\n", shapes[i][0]);
+            }
             playgame();
             return 0;
         }
@@ -414,7 +418,6 @@ void PrintScore(int score)
 //웜이 지나간 자리 지우기
 void ClearWorm(int x, int y)
 {
-
     if (x == x && y == y) {
         gotoxyD(x, y);
         printf(" ");
@@ -482,83 +485,6 @@ void CreateItem(pITEM itemNode, int* itemNo) {
     newItem->itemType = ITEM_EXP;
 }
 
-//아이템 화면에 출력
-void PrintItem(pITEM itemNode)
-{
-    pITEM curr = itemNode->next;
-    /*
-    테스트 출력
-    gotoxy(0, 0);
-    printf("%d, %d", shapes[0][0],shapes[0][1]);*/
-    int i = 0;
-    while (1) {
-        gotoxy(shapes[i][0], shapes[i][1]);
-        printf("□");
-        i++;
-        if (curr != NULL) {
-            gotoxy(shapes[i - 1][0], shapes[i - 1][1]);
-            printf(" ");
-
-        }
-        else {
-            gotoxy(shapes[i - 1][0], shapes[i - 1][1]);
-            printf(" ");
-        }
-        if (i == mode) {
-            break;
-        }
-    }
-    /*
-    while (1) {
-        gotoxy(shapes[i][0], shapes[i][1]);
-        printf("%d", shapes[i]);
-        printf("○");
-        printf("\n");
-        i++;
-        if (i == mode) {
-            break;
-        }
-    }*/
-
-    while (curr != NULL && mode == 30)
-    {
-        //gotoxyD(curr->x, curr->y);
-       // printf("△");
-
-        curr = curr->next;
-        int i = 0;
-        while (1) {
-
-
-            gotoxy(shapes[i][0], shapes[i][1]);
-            //printf("%d", shapes[i]);
-            printf("△\n");
-            i++;
-            if (i == mode) {
-                break;
-            }
-        }
-    }
-    while (curr != NULL && mode == 38)
-    {
-        // gotoxyD(curr->x, curr->y);
-         //printf("□");
-        curr = curr->next;
-        int i = 0;
-        while (1) {
-
-
-            gotoxy(shapes[i][0], shapes[i][1]);
-            printf("□");
-            i++;
-            if (i == mode) {
-                break;
-            }
-        }
-        //ClearWorm(x,y);
-    }
-}
-
 //리스트에서 itemNo의 위치를 찾아서 카운터를 리턴
 int findItemNoInList(pITEM itemNode, int itemNo)
 {
@@ -609,26 +535,23 @@ void delItemFromList(pITEM itemNode, int targetNodeNumber)
 }
 
 //아이템(골뱅이)와 웜의 헤드가 만났는지 검사, 
-//delItemNo는 먹은 아이템을 지우는 함수로 넘겨줄 변수
-int CheckItemHit(pWORM wormHeadPointer, pITEM itemNode, int* delItemNo)
+// left, result로 남은개수와 먹은개수 넘겨줌
+int CheckItemHit(pWORM wormHeadPointer, int* left, int* result)
 {
-    pITEM curr;
-    int nodeNo = 0;
-    curr = itemNode->next;
-    /*while (curr != NULL)
-    {
-       if (wormHeadPointer->x == curr->x && wormHeadPointer->y == curr->y)
-       {
-          if (curr->itemType == ITEM_EXP)
-          {
-             *delItemNo = curr->itemNo;
-             return 1; //아이템 먹으면 1리턴
-          }
-       }
-       nodeNo++;
-       curr = curr->next;
-    }*/
-    return 0;//아이템을 안만나면 0
+    for (int i = 0; i < mode; i++) {
+        if (wormHeadPointer->x == (shapes[i][0] - LEFT_MARGIN) && wormHeadPointer->y == (shapes[i][1] - TOP_MARGIN)) {
+            *result += 1;   // 먹은개수 업데이트
+            *left -= 1;     // 남은개수 업데이트
+            shapes[i][0] = 0;
+            continue;
+        }
+        if (shapes[i][0] > 0) {
+            gotoxyD(shapes[i][0] - LEFT_MARGIN, shapes[i][1] - TOP_MARGIN);
+            printf("o");
+        }
+    }
+    
+    return 1;//아이템을 안만나면 0
 }
 
 //아이템의 링크드 리스트 메모리 해제
@@ -686,6 +609,8 @@ void playgame()
     int delItemNo = 0;      //지울아이템넘버를 받을 변수초기화
     int itemNo = 10000;//아이템의 최초번호
     start = clock();   //시작 시간
+    int left = mode;
+    int result = 0;
 
     //아이템 생성 위치 난수 시드
     srand((unsigned int)time(NULL));
@@ -759,16 +684,12 @@ void playgame()
         }
 
         //아이템 먹었는지 확인
-        if (CheckItemHit(wormHeadPointer, itemNode, &delItemNo))
+        if (CheckItemHit(wormHeadPointer,&left,&result))
         {
-            AddWorm(wormTailNode);
-            delItemFromList(itemNode, findItemNoInList(itemNode, delItemNo));
-            score += 100;
+            score = result;
             itemCounter--;
         }
 
-
-        PrintItem(itemNode);
         PrintWorm(wormTailNode, wormHeadNode);
         PrintScore(score);
         Sleep(DELAYTIME);
