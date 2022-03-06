@@ -18,13 +18,13 @@
 #define LEFT_MARGIN 25   //화면왼쪽마진(공백)
 #define TOP_MARGIN 3   //화면 상단마진(공백)
 #define DELAYTIME 200   //Sleep함수에 들어갈 x/1000 초
-#define TIMER 30.0   //Sleep함수에 들어갈 x/1000 초
+#define TIMER 60.0   //Sleep함수에 들어갈 x/1000 초
 
 int inputkey = 0;
-int mode = 1;   // 달고나모양 (1=동그라미/ 2=세모 / 3=네모)
-clock_t start;   // 타이머 게임시작시간 저장
+int mode = 1;    // 모양에 따른 배열길이 
+clock_t start;   // 타이머 게임시작시간 
 double limit = TIMER;   // 남은 시간
-int(*shapes)[2];
+int(*shapes)[2];    // 모양 그릴 위치배열
 
 void printstart();
 void playgame();
@@ -47,17 +47,6 @@ typedef struct _WORM
     struct _WORM* next;   //다음노드주소
     struct _WORM* before;//이전노드주소
 }WORM, * pWORM;
-
-//아이템을 구현할 단일연결리스트 구조체
-typedef struct _ITEM
-{
-    int x;
-    int y;
-    int itemType;
-    int itemNo;
-    struct _ITEM* next;
-}ITEM, * pITEM;
-#pragma pack(pop)
 
 //커서를 일정 좌표로 이동
 void gotoxyD(int x, int y)
@@ -397,7 +386,7 @@ void PrintWorm(pWORM wormTailNode, pWORM wormHeadNode)
     while (curr != wormHeadNode)
     {
         gotoxyD(curr->x, curr->y);
-        printf("o");
+        printf("@");
         curr = curr->next;
     }
 }
@@ -472,68 +461,6 @@ void FreeWormList(pWORM wormTailNode)
     }
 }
 
-//item 발생시키기
-void CreateItem(pITEM itemNode, int* itemNo) {
-
-    pITEM newItem = malloc(sizeof(ITEM));
-
-    newItem->next = itemNode->next;
-    newItem->itemNo = (*itemNo)++;
-    itemNode->next = newItem;
-    newItem->x = 3 + rand() % (FIELD_WIDTH - 3);
-    newItem->y = 3 + rand() % (FIELD_HEIGHT - 3);
-    newItem->itemType = ITEM_EXP;
-}
-
-//리스트에서 itemNo의 위치를 찾아서 카운터를 리턴
-int findItemNoInList(pITEM itemNode, int itemNo)
-{
-    int numberOfNode = 0;   //노드번호를 저장할 변수
-
-    pITEM curr;      //노드사이를 움직일 포인터
-    curr = itemNode->next;      //첫번째 데이터를 가지키는 주소를 curr에 할당
-
-    while (curr != NULL)   //반복문을 돌리면서 찾는 데이터를 발견하면 노드번호를 리턴
-    {
-        numberOfNode++;
-        if (itemNo == curr->itemNo)
-        {
-            return numberOfNode;
-        }
-        curr = curr->next;
-    }
-
-    return numberOfNode;
-}
-
-
-
-//아이템의 노드번호를 받아 그 번호의 노드를 삭제
-void delItemFromList(pITEM itemNode, int targetNodeNumber)
-{
-    pITEM beforeTarget;      //제거할 노드의 앞노드
-    pITEM target;      //제거할 노드
-
-    int counter = 0;
-
-    beforeTarget = itemNode;
-
-    if (targetNodeNumber < 0)   // 0이 입력되면 FirstNode를 삭제하기 때문에 실행하지 않고 리턴
-        return 0;
-
-    //노드를 targetNodeNumber-1 만큼 이동시켜서 beforeTarget을 제거할 노드 앞으로 이동시킴
-    while (counter < targetNodeNumber - 1)
-    {
-        beforeTarget = beforeTarget->next;
-        counter = counter + 1;
-    }
-
-    //노드를 리스트에서 제거
-    target = beforeTarget->next;
-    beforeTarget->next = target->next;
-    free(target);
-}
-
 //아이템(골뱅이)와 웜의 헤드가 만났는지 검사, 
 // left, result로 남은개수와 먹은개수 넘겨줌
 int CheckItemHit(pWORM wormHeadPointer, int* left, int* result)
@@ -551,22 +478,9 @@ int CheckItemHit(pWORM wormHeadPointer, int* left, int* result)
         }
     }
     
-    return 1;//아이템을 안만나면 0
+    return 1; 
 }
 
-//아이템의 링크드 리스트 메모리 해제
-void FreeItemList(pITEM itemNode)
-{
-    pITEM curr;
-    pITEM temp;
-    curr = itemNode;
-    while (curr != NULL)
-    {
-        temp = curr->next;
-        free(curr);
-        curr = temp;
-    }
-}
 // 타이머
 void timerlimit() {
     clock_t end = clock();
@@ -581,7 +495,6 @@ void playgame()
     pWORM wormHeadNode = malloc(sizeof(WORM));//이중연결리스트 헤드노드
     pWORM wormTailNode = malloc(sizeof(WORM));//이중연결리스트 테일노드
     pWORM addWorm = malloc(sizeof(WORM));//첫번째 웜몸통 
-    pITEM itemNode = malloc(sizeof(ITEM));//아이템용 단일 연결리스트
 
     wormHeadNode->next = NULL;
     wormHeadNode->before = addWorm;
@@ -593,9 +506,6 @@ void playgame()
     wormTailNode->next = addWorm;
     wormTailNode->before = NULL;
 
-    itemNode->next = NULL;
-    itemNode->itemNo = -1;
-
     //지렁이 게임시작 지렁이 생성
     for (int i = 9; i > 0; i--)
         AddWorm(wormTailNode);
@@ -604,16 +514,10 @@ void playgame()
     pWORM wormHeadPointer = addWorm;
 
     int score = 0;         //최초점수
-    int itemCounter = 0;   //아이템 생성 한도 카운터
     char key;            //키입력받을 변수
-    int delItemNo = 0;      //지울아이템넘버를 받을 변수초기화
-    int itemNo = 10000;//아이템의 최초번호
     start = clock();   //시작 시간
     int left = mode;
     int result = 0;
-
-    //아이템 생성 위치 난수 시드
-    srand((unsigned int)time(NULL));
 
     system("cls");   //화면지우고
     PrintField();   //필드 출력
@@ -623,7 +527,6 @@ void playgame()
     {
         //테스트용 출력부분
         //gotoxyD(-LEFT_MARGIN, 0);
-        //printf("먹은 아이템 : %d\n",delItemNo);
         //PrintItemList(itemNode);
         timerlimit();
         if (_kbhit() != 0)
@@ -676,18 +579,11 @@ void playgame()
             Sleep(2000);
             break;
         }
-        //아이템을 생성
-        while (itemCounter < ITEM_MAX)
-        {
-            CreateItem(itemNode, &itemNo);
-            itemCounter++;
-        }
 
         //아이템 먹었는지 확인
         if (CheckItemHit(wormHeadPointer,&left,&result))
         {
-            score = result;
-            itemCounter--;
+            score = result*100;
         }
 
         PrintWorm(wormTailNode, wormHeadNode);
@@ -695,5 +591,4 @@ void playgame()
         Sleep(DELAYTIME);
     }
     FreeWormList(wormTailNode);
-    FreeItemList(itemNode);
 }
