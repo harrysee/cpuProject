@@ -18,7 +18,7 @@
 #define LEFT_MARGIN 25   //화면왼쪽마진(공백)
 #define TOP_MARGIN 3   //화면 상단마진(공백)
 #define DELAYTIME 200   //Sleep함수에 들어갈 x/1000 초
-#define TIMER 60.0   //Sleep함수에 들어갈 x/1000 초
+#define TIMER 40.0   //Sleep함수에 들어갈 x/1000 초
 
 int inputkey = 0;
 int mode = 1;    // 모양에 따른 배열길이 
@@ -487,7 +487,7 @@ void timerlimit() {
     double time = ((double)(end - start)) / CLOCKS_PER_SEC; //초단위 변환
     limit = TIMER - time;
     gotoxy(FIELD_WIDTH / 2 + 20, 1);
-    printf("타이머 : %0.3lf\n", limit); //소수점 셋째 자리까지
+    printf("타이머 : %0.2lf\n", limit); //소수점 셋째 자리까지
 }
 
 void playgame()
@@ -532,7 +532,7 @@ void playgame()
         if (_kbhit() != 0)
         {
             key = _getch();
-            if (key == 'q' || key == 'Q')
+            if (key == 27)  // esc키 누르면종료
             {
                 printf("%c", key);
                 break;
@@ -579,11 +579,18 @@ void playgame()
             Sleep(2000);
             break;
         }
+        // 아이템 출력
+        CheckItemHit(wormHeadPointer, &left, &result);
+        score = result * 100;
 
-        //아이템 먹었는지 확인
-        if (CheckItemHit(wormHeadPointer,&left,&result))
+        //아이템 다 먹으면 종료
+        if (left<=0)
         {
-            score = result*100;
+            system("cls");
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+            printf("당신은 생존했습니다. luck");
+            Sleep(2000);
+            break;
         }
 
         PrintWorm(wormTailNode, wormHeadNode);
