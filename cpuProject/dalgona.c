@@ -575,20 +575,62 @@ void playgame()
         if (limit <= 0.0) {
             system("cls");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-            printf("타임 아웃, 탈락입니다. YOUR DEAD");
+            printf("%d", result);
+            gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2);
+            printf("만큼 뜯겨졌다");
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-2);
+            printf("%d", left);
+            gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2-2);
+            printf("만큼 남았다");
             Sleep(2000);
             break;
+            if (left <= 10)
+            {
+                system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+                printf(". luck");
+                Sleep(2000);
+                break;
+            }
+            if (left <= 20)
+            {
+                system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+                printf(". luck");
+                Sleep(2000);
+                break;
+            }
+            
+            if (left <= 30)
+            {
+                system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+                printf(". luck");
+                Sleep(2000);
+                break;
+            }
+            if (left <= 40)
+            {
+                system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+                printf(". luck");
+                Sleep(2000);
+                break;
+            }
         }
         // 아이템 출력
         CheckItemHit(wormHeadPointer, &left, &result);
         score = result * 100;
-
+        
         //아이템 다 먹으면 종료
         if (left<=0)
         {
             system("cls");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-            printf("당신은 생존했습니다. luck");
+            printf("--여기에 오징어게임 생존멘트");
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-5);
+            printf("살아남았습니다 시간은 %0.2lf\n", limit);
+            
             Sleep(2000);
             break;
         }
