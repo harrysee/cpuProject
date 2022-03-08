@@ -577,46 +577,59 @@ void playgame()
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
             printf("%d", result);
             gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2);
-            printf("만큼 뜯겨졌다");
+            printf("만큼 뜯겨졌습니다");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-2);
             printf("%d", left);
             gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2-2);
-            printf("만큼 남았다");
+            printf("만큼 남았습니다");
+            
             Sleep(2000);
-            break;
-            if (left <= 10)
+           // break;
+            if (result <=10)
             {
                 system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-                printf(". luck");
+                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
+                printf("10개도 뜯지 못했습니다. \n 따라서 사망");
                 Sleep(2000);
                 break;
             }
-            if (left <= 20)
+            if (result <= 20)
             {
                 system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-                printf(". luck");
+                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
+                printf("절반도 뜯지 못했습니다.\n 따라서 사망");
                 Sleep(2000);
                 break;
             }
             
-            if (left <= 30)
+            if (result <= 30)
             {
                 system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-                printf(". luck");
+                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
+                printf("절반정도 뜯었습니다.\n그래도 사망");
                 Sleep(2000);
                 break;
             }
-            if (left <= 40)
+            if (result <= 40)
             {
                 system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-                printf(". luck");
+                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
+                printf("거의 다 뜯었는데.. \n아깝게 사망 ");
                 Sleep(2000);
                 break;
             }
+            if (result <= 50)
+            {
+                system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
+                printf("진짜 미세한 차이로 사망...");
+                Sleep(2000);
+                break;
+            }
+            
+            
+            
+
         }
         // 아이템 출력
         CheckItemHit(wormHeadPointer, &left, &result);
@@ -627,9 +640,9 @@ void playgame()
         {
             system("cls");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-            printf("--여기에 오징어게임 생존멘트");
+            printf("△통과, 다음 게임으로 넘어갑니다☆");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-5);
-            printf("살아남았습니다 시간은 %0.2lf\n", limit);
+            printf("○시간은 %0.2lf\n", limit);
             
             Sleep(2000);
             break;
