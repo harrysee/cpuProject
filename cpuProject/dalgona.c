@@ -583,45 +583,45 @@ void playgame()
             gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2-2);
             printf("만큼 남았습니다");
             
-            Sleep(2000);
+           // Sleep(2000);
            // break;
             if (result <=10)
             {
-                system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
-                printf("10개도 뜯지 못했습니다. \n 따라서 사망");
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 -10, FIELD_HEIGHT / 2-4);
+                printf("10개도 뜯지 못했습니다. 따라서 사망");
                 Sleep(2000);
                 break;
             }
             if (result <= 20)
             {
-                system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
-                printf("절반도 뜯지 못했습니다.\n 따라서 사망");
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
+                printf("절반도 뜯지 못했습니다. 따라서 사망");
                 Sleep(2000);
                 break;
             }
             
             if (result <= 30)
             {
-                system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
-                printf("절반정도 뜯었습니다.\n그래도 사망");
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
+                printf("절반정도 뜯었습니다. 그래도 사망");
                 Sleep(2000);
                 break;
             }
             if (result <= 40)
             {
-                system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
-                printf("거의 다 뜯었는데.. \n아깝게 사망 ");
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
+                printf("거의 다 뜯었는데.. 아깝게 사망 ");
                 Sleep(2000);
                 break;
             }
             if (result <= 50)
             {
-                system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 4, FIELD_HEIGHT / 2);
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
                 printf("진짜 미세한 차이로 사망...");
                 Sleep(2000);
                 break;
