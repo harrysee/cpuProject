@@ -12,16 +12,16 @@
 #define RIGHT 77      //키보드 우
 #define UP 72         //키보드 위
 #define DOWN 80         //지보드 아래
-#define ITEM_MAX 2      //화면에 표시되는 아이템개수
 #define ITEM_GOLD 101   //골드 아이템 인디케이터
 #define ITEM_EXP 102   //경험치 아이템 인디케이터
 #define LEFT_MARGIN 25   //화면왼쪽마진(공백)
 #define TOP_MARGIN 3   //화면 상단마진(공백)
-#define DELAYTIME 200   //Sleep함수에 들어갈 x/1000 초
+#define DELAYTIME 200   //Sleep함수에 들어갈 x/1000 초 (지렁이속도/원래값200)ㄴ
 #define TIMER 40.0   //Sleep함수에 들어갈 x/1000 초
 
 int inputkey = 0;
 int mode = 1;    // 모양에 따른 배열길이 
+char *mshape = 'o';
 clock_t start;   // 타이머 게임시작시간 
 double limit = TIMER;   // 남은 시간
 int(*shapes)[2];    // 모양 그릴 위치배열
@@ -169,7 +169,7 @@ void printstart() {
     gotoxy(56, 20);
     printf("게임 종료");
 
-    print_by_name("고에스더 김민주 전유리");
+    print_by_name("전유리 고에스더 김민주");
 }
 
 // 게임시작 시작종료처리 함수
@@ -299,10 +299,12 @@ void selectShape() {
             case 24 + 30:
                 mode = modeSize(2);
                 shapes = shape2();
+                mshape = "△";
                 break;
             case 24 + 30 * 2:
                 mode = modeSize(3);
                 shapes = shape3();
+                mshape = "□";
                 break;
             }
             gotoxy(0, 0);
@@ -392,16 +394,14 @@ void PrintWorm(pWORM wormTailNode, pWORM wormHeadNode)
 }
 
 //게임점수 출력
-void PrintScore(int score)
+void PrintScore(int score, int left)
 {
     gotoxyD(FIELD_WIDTH + 3, 3);
-    printf("점수 : %d점", score);
+    printf("%s 잘린달고나조각 : %d개",mshape, score);
     gotoxyD(FIELD_WIDTH + 3, 5);
-    printf("종료하려면 Q를 누르세요");
-    gotoxyD(FIELD_WIDTH + 3, 7);
-    printf("조작은 화살표키로");
-    gotoxyD(FIELD_WIDTH + 3, 9);
-    printf("mode : %d ", mode);
+    printf("%s 남은달고나조각 : %d개", mshape, left);
+    gotoxy(FIELD_WIDTH / 2 + 15, 29);
+    printf("종료하려면 ESC를 누르시오");
 }
 
 //웜이 지나간 자리 지우기
@@ -487,7 +487,9 @@ void timerlimit() {
     double time = ((double)(end - start)) / CLOCKS_PER_SEC; //초단위 변환
     limit = TIMER - time;
     gotoxy(FIELD_WIDTH / 2 + 20, 1);
-    printf("타이머 : %0.2lf\n", limit); //소수점 셋째 자리까지
+    printf("[ 타이머 : %0.2lf ]\n", limit); //소수점 셋째 자리까지
+    gotoxy(FIELD_WIDTH / 2 + 20, 2);
+    printf("    ||      ||"); //소수점 셋째 자리까지
 }
 
 void playgame()
@@ -649,7 +651,7 @@ void playgame()
         }
 
         PrintWorm(wormTailNode, wormHeadNode);
-        PrintScore(score);
+        PrintScore(result,left);
         Sleep(DELAYTIME);
     }
     FreeWormList(wormTailNode);
