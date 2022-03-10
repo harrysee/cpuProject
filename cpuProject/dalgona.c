@@ -21,7 +21,7 @@
 
 int inputkey = 0;
 int mode = 1;    // 모양에 따른 배열길이 
-char *mshape = 'o';
+char* mshape = 'o';
 clock_t start;   // 타이머 게임시작시간 
 double limit = TIMER;   // 남은 시간
 int(*shapes)[2];    // 모양 그릴 위치배열
@@ -397,7 +397,7 @@ void PrintWorm(pWORM wormTailNode, pWORM wormHeadNode)
 void PrintScore(int score, int left)
 {
     gotoxyD(FIELD_WIDTH + 3, 3);
-    printf("%s 잘린달고나조각 : %d개",mshape, score);
+    printf("%s 잘린달고나조각 : %d개", mshape, score);
     gotoxyD(FIELD_WIDTH + 3, 5);
     printf("%s 남은달고나조각 : %d개", mshape, left);
     gotoxy(FIELD_WIDTH / 2 + 15, 29);
@@ -477,8 +477,8 @@ int CheckItemHit(pWORM wormHeadPointer, int* left, int* result)
             printf("o");
         }
     }
-    
-    return 1; 
+
+    return 1;
 }
 
 // 타이머
@@ -568,7 +568,7 @@ void playgame()
         {
             system("cls");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-            printf("벽에 부딛혔습니다. GAME OVER");
+            printf("달고나가 부셔졌습니다. GAME OVER");
             Sleep(2000);
             break;
         }
@@ -580,78 +580,75 @@ void playgame()
             printf("%d", result);
             gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2);
             printf("만큼 뜯겨졌습니다");
-            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-2);
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 2);
             printf("%d", left);
-            gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2-2);
+            gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2 - 2);
             printf("만큼 남았습니다");
-            
-           // Sleep(2000);
-           // break;
-            if (result <=10)
+
+            // Sleep(2000);
+            // break;
+            if (result <= 10)
             {
                 //system("cls");
-                gotoxyD(FIELD_WIDTH / 2 -10, FIELD_HEIGHT / 2-4);
-                printf("10개도 뜯지 못했습니다. 따라서 사망");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("10개도 뜯지 못했습니다. 시작하자마자 총맞아버려서 사망");
                 Sleep(2000);
                 break;
             }
             if (result <= 20)
             {
                 //system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
-                printf("절반도 뜯지 못했습니다. 따라서 사망");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("절반도 뜯지 못했습니다. 시작은 했으나 시작하고 얼마 안되서 총을 피하지 못해서 사망");
                 Sleep(2000);
                 break;
             }
-            
+
             if (result <= 30)
             {
                 //system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
-                printf("절반정도 뜯었습니다. 그래도 사망");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("절반정도 뜯었습니다.  절반뜯었다고 안심하다가 총맞고 사망");
                 Sleep(2000);
                 break;
             }
             if (result <= 40)
             {
                 //system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
-                printf("거의 다 뜯었는데.. 아깝게 사망 ");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("거의 다 뜯었는데.. 총으로 팔이 뜯겨져 사망했습니다 ");
                 Sleep(2000);
                 break;
             }
             if (result <= 50)
             {
                 //system("cls");
-                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-4);
-                printf("진짜 미세한 차이로 사망...");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("진짜 미세한 차이로 사망... 운이 따라주지 못해서..사망");
                 Sleep(2000);
                 break;
             }
-            
-            
-            
 
         }
         // 아이템 출력
         CheckItemHit(wormHeadPointer, &left, &result);
         score = result * 100;
-        
+
         //아이템 다 먹으면 종료
-        if (left<=0)
+        if (left <= 0)
         {
             system("cls");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
             printf("△통과, 다음 게임으로 넘어갑니다☆");
-            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2-5);
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 5);
             printf("○시간은 %0.2lf\n", limit);
-            
+
             Sleep(2000);
             break;
         }
 
         PrintWorm(wormTailNode, wormHeadNode);
-        PrintScore(result,left);
+        PrintScore(result, left);
         Sleep(DELAYTIME);
     }
     FreeWormList(wormTailNode);
