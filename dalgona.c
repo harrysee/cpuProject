@@ -12,16 +12,21 @@
 #define RIGHT 77      //키보드 우
 #define UP 72         //키보드 위
 #define DOWN 80         //지보드 아래
-#define ITEM_MAX 2      //화면에 표시되는 아이템개수
 #define ITEM_GOLD 101   //골드 아이템 인디케이터
 #define ITEM_EXP 102   //경험치 아이템 인디케이터
 #define LEFT_MARGIN 25   //화면왼쪽마진(공백)
 #define TOP_MARGIN 3   //화면 상단마진(공백)
-#define DELAYTIME 200   //Sleep함수에 들어갈 x/1000 초
-#define TIMER 60.0   //Sleep함수에 들어갈 x/1000 초
+#define DELAYTIME 200   //Sleep함수에 들어갈 x/1000 초 (지렁이속도/원래값200)ㄴ
+#define TIMER 40.0   //Sleep함수에 들어갈 x/1000 초
+
+#define SHAPES_SIZE 2
+#define SHAPES_CIRCLE 54
+#define SHAPES_ANGLE 40
+#define SHAPES_SQUARE 56
 
 int inputkey = 0;
 int mode = 1;    // 모양에 따른 배열길이 
+char* mshape = 'o';
 clock_t start;   // 타이머 게임시작시간 
 double limit = TIMER;   // 남은 시간
 int(*shapes)[2];    // 모양 그릴 위치배열
@@ -169,7 +174,7 @@ void printstart() {
     gotoxy(56, 20);
     printf("게임 종료");
 
-    print_by_name("고에스더 김민주 전유리");
+    print_by_name("전유리 고에스더 김민주");
 }
 
 // 게임시작 시작종료처리 함수
@@ -295,14 +300,17 @@ void selectShape() {
             case 24:
                 mode = modeSize(1);
                 shapes = shape1();
+                mshape = "o";
                 break;
             case 24 + 30:
                 mode = modeSize(2);
                 shapes = shape2();
+                mshape = "△";
                 break;
             case 24 + 30 * 2:
                 mode = modeSize(3);
                 shapes = shape3();
+                mshape = "□";
                 break;
             }
             gotoxy(0, 0);
@@ -392,16 +400,14 @@ void PrintWorm(pWORM wormTailNode, pWORM wormHeadNode)
 }
 
 //게임점수 출력
-void PrintScore(int score)
+void PrintScore(int score, int left)
 {
     gotoxyD(FIELD_WIDTH + 3, 3);
-    printf("점수 : %d점", score);
+    printf("%s 잘린달고나조각 : %d개", mshape, score);
     gotoxyD(FIELD_WIDTH + 3, 5);
-    printf("종료하려면 Q를 누르세요");
-    gotoxyD(FIELD_WIDTH + 3, 7);
-    printf("조작은 화살표키로");
-    gotoxyD(FIELD_WIDTH + 3, 9);
-    printf("mode : %d ", mode);
+    printf("%s 남은달고나조각 : %d개", mshape, left);
+    gotoxy(FIELD_WIDTH / 2 + 15, 29);
+    printf("종료하려면 ESC를 누르시오");
 }
 
 //웜이 지나간 자리 지우기
@@ -477,8 +483,8 @@ int CheckItemHit(pWORM wormHeadPointer, int* left, int* result)
             printf("o");
         }
     }
-    
-    return 1; 
+
+    return 1;
 }
 
 // 타이머
@@ -487,7 +493,9 @@ void timerlimit() {
     double time = ((double)(end - start)) / CLOCKS_PER_SEC; //초단위 변환
     limit = TIMER - time;
     gotoxy(FIELD_WIDTH / 2 + 20, 1);
-    printf("타이머 : %0.3lf\n", limit); //소수점 셋째 자리까지
+    printf("[ 타이머 : %0.2lf ]\n", limit); //소수점 셋째 자리까지
+    gotoxy(FIELD_WIDTH / 2 + 20, 2);
+    printf("    ||      ||"); //소수점 셋째 자리까지
 }
 
 void playgame()
@@ -532,7 +540,7 @@ void playgame()
         if (_kbhit() != 0)
         {
             key = _getch();
-            if (key == 'q' || key == 'Q')
+            if (key == 27)  // esc키 누르면종료
             {
                 printf("%c", key);
                 break;
@@ -575,20 +583,270 @@ void playgame()
         if (limit <= 0.0) {
             system("cls");
             gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
-            printf("타임 아웃, 탈락입니다. YOUR DEAD");
+            printf("%d", result);
+            gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2);
+            printf("만큼 뜯겨졌습니다");
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 2);
+            printf("%d", left);
+            gotoxyD(FIELD_WIDTH / 2 - 7, FIELD_HEIGHT / 2 - 2);
+            printf("만큼 남았습니다");
+
+            // Sleep(2000);
+            // break;
+            if (result <= 10)
+            {
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("10개도 뜯지 못했습니다. 따라서 사망");
+                Sleep(2000);
+                break;
+            }
+            if (result <= 20)
+            {
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("절반도 뜯지 못했습니다. 따라서 사망");
+                Sleep(2000);
+                break;
+            }
+
+            if (result <= 30)
+            {
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("절반정도 뜯었습니다. 그래도 사망");
+                Sleep(2000);
+                break;
+            }
+            if (result <= 40)
+            {
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("거의 다 뜯었는데.. 아깝게 사망 ");
+                Sleep(2000);
+                break;
+            }
+            if (result <= 50)
+            {
+                //system("cls");
+                gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 4);
+                printf("진짜 미세한 차이로 사망...");
+                Sleep(2000);
+                break;
+            }
+
+
+
+
+        }
+        // 아이템 출력
+        CheckItemHit(wormHeadPointer, &left, &result);
+        score = result * 100;
+
+        //아이템 다 먹으면 종료
+        if (left <= 0)
+        {
+            system("cls");
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2);
+            printf("△통과, 다음 게임으로 넘어갑니다☆");
+            gotoxyD(FIELD_WIDTH / 2 - 10, FIELD_HEIGHT / 2 - 5);
+            printf("○시간은 %0.2lf\n", limit);
+
             Sleep(2000);
             break;
         }
 
-        //아이템 먹었는지 확인
-        if (CheckItemHit(wormHeadPointer,&left,&result))
-        {
-            score = result*100;
-        }
-
         PrintWorm(wormTailNode, wormHeadNode);
-        PrintScore(score);
+        PrintScore(result, left);
         Sleep(DELAYTIME);
     }
     FreeWormList(wormTailNode);
+}
+
+
+// shape ----------------------------------------
+
+int(*shape1())[SHAPES_SIZE];
+int(*shape2())[SHAPES_SIZE];
+int(*shape3())[SHAPES_SIZE];
+int modeSize(int);
+
+int modeSize(int mode) {
+    switch (mode)
+    {
+    case 1:
+        return SHAPES_CIRCLE;
+    case 2:
+        return SHAPES_ANGLE;
+    default:
+        return SHAPES_SQUARE;
+        break;
+    }
+}
+int(*shape1())[SHAPES_SIZE] {
+    static int shapes[SHAPES_CIRCLE][SHAPES_SIZE] = { 0 };
+    shapes[0][0] = 43; shapes[0][1] = 7;
+    shapes[1][0] = 45; shapes[1][1] = 7;
+    shapes[2][0] = 47; shapes[2][1] = 7;
+    shapes[3][0] = 49; shapes[3][1] = 7;
+    shapes[4][0] = 51; shapes[4][1] = 7;
+    shapes[5][0] = 53; shapes[5][1] = 7;
+    shapes[6][0] = 55; shapes[6][1] = 7;
+    shapes[7][0] = 57; shapes[7][1] = 7;
+    shapes[8][0] = 59; shapes[8][1] = 7;
+    shapes[9][0] = 61; shapes[9][1] = 7;
+    shapes[10][0] = 63; shapes[10][1] = 7;
+    shapes[11][0] = 65; shapes[11][1] = 7;
+    shapes[12][0] = 67; shapes[12][1] = 7;
+    shapes[13][0] = 69; shapes[13][1] = 7;
+    shapes[14][0] = 41; shapes[14][1] = 8;
+    shapes[15][0] = 71; shapes[15][1] = 8;
+    shapes[16][0] = 39; shapes[16][1] = 9;
+    shapes[17][0] = 73; shapes[17][1] = 9;
+    shapes[18][0] = 37; shapes[18][1] = 10;
+    shapes[19][0] = 75; shapes[19][1] = 10;
+    shapes[20][0] = 35; shapes[20][1] = 11;
+    shapes[21][0] = 77; shapes[21][1] = 11;
+    shapes[22][0] = 35; shapes[22][1] = 12;
+    shapes[23][0] = 77; shapes[23][1] = 12;
+    shapes[24][0] = 35; shapes[24][1] = 13;
+    shapes[25][0] = 77; shapes[25][1] = 13;
+    shapes[26][0] = 35; shapes[26][1] = 14;
+    shapes[27][0] = 77; shapes[27][1] = 14;
+    shapes[28][0] = 35; shapes[28][1] = 15;
+    shapes[29][0] = 77; shapes[29][1] = 15;
+    shapes[30][0] = 35; shapes[30][1] = 16;
+    shapes[31][0] = 77; shapes[31][1] = 16;
+    shapes[32][0] = 35; shapes[32][1] = 17;
+    shapes[33][0] = 77; shapes[33][1] = 17;
+    shapes[34][0] = 37; shapes[34][1] = 18;
+    shapes[35][0] = 75; shapes[35][1] = 18;
+    shapes[36][0] = 39; shapes[36][1] = 19;
+    shapes[37][0] = 73; shapes[37][1] = 19;
+    shapes[38][0] = 41; shapes[38][1] = 20;
+    shapes[39][0] = 43; shapes[39][1] = 20;
+    shapes[40][0] = 45; shapes[40][1] = 20;
+    shapes[41][0] = 47; shapes[41][1] = 20;
+    shapes[42][0] = 49; shapes[42][1] = 20;
+    shapes[43][0] = 51; shapes[43][1] = 20;
+    shapes[44][0] = 53; shapes[44][1] = 20;
+    shapes[45][0] = 55; shapes[45][1] = 20;
+    shapes[46][0] = 57; shapes[46][1] = 20;
+    shapes[47][0] = 59; shapes[47][1] = 20;
+    shapes[48][0] = 61; shapes[48][1] = 20;
+    shapes[49][0] = 63; shapes[49][1] = 20;
+    shapes[50][0] = 65; shapes[50][1] = 20;
+    shapes[51][0] = 67; shapes[51][1] = 20;
+    shapes[52][0] = 69; shapes[52][1] = 20;
+    shapes[53][0] = 71; shapes[53][1] = 20;
+
+    return shapes;
+
+}
+int(*shape2())[SHAPES_SIZE] {
+    static int shapes[SHAPES_ANGLE][SHAPES_SIZE] = { 0 };
+    shapes[0][0] = 58; shapes[0][1] = 7;
+    shapes[1][0] = 56; shapes[1][1] = 8;
+    shapes[2][0] = 60; shapes[2][1] = 8;
+    shapes[3][0] = 54; shapes[3][1] = 9;
+    shapes[4][0] = 62; shapes[4][1] = 9;
+    shapes[5][0] = 52; shapes[5][1] = 10;
+    shapes[6][0] = 64; shapes[6][1] = 10;
+    shapes[7][0] = 50; shapes[7][1] = 11;
+    shapes[8][0] = 66; shapes[8][1] = 11;
+    shapes[9][0] = 48; shapes[9][1] = 12;
+    shapes[10][0] = 68; shapes[10][1] = 12;
+    shapes[11][0] = 46; shapes[11][1] = 13;
+    shapes[12][0] = 70; shapes[12][1] = 13;
+    shapes[13][0] = 44; shapes[13][1] = 14;
+    shapes[14][0] = 72; shapes[14][1] = 14;
+    shapes[15][0] = 42; shapes[15][1] = 15;
+    shapes[16][0] = 74; shapes[16][1] = 15;
+    shapes[17][0] = 40; shapes[17][1] = 16;
+    shapes[18][0] = 76; shapes[18][1] = 16;
+    shapes[19][0] = 38; shapes[19][1] = 17;
+    shapes[20][0] = 40; shapes[20][1] = 17;
+    shapes[21][0] = 42; shapes[21][1] = 17;
+    shapes[22][0] = 44; shapes[22][1] = 17;
+    shapes[23][0] = 46; shapes[23][1] = 17;
+    shapes[24][0] = 48; shapes[24][1] = 17;
+    shapes[25][0] = 50; shapes[25][1] = 17;
+    shapes[26][0] = 52; shapes[26][1] = 17;
+    shapes[27][0] = 54; shapes[27][1] = 17;
+    shapes[28][0] = 56; shapes[28][1] = 17;
+    shapes[29][0] = 58; shapes[29][1] = 17;
+    shapes[30][0] = 60; shapes[30][1] = 17;
+    shapes[31][0] = 62; shapes[31][1] = 17;
+    shapes[32][0] = 64; shapes[32][1] = 17;
+    shapes[33][0] = 66; shapes[33][1] = 17;
+    shapes[34][0] = 68; shapes[34][1] = 17;
+    shapes[35][0] = 70; shapes[35][1] = 17;
+    shapes[36][0] = 72; shapes[36][1] = 17;
+    shapes[37][0] = 74; shapes[37][1] = 17;
+    shapes[38][0] = 76; shapes[38][1] = 17;
+    shapes[39][0] = 78; shapes[39][1] = 17;
+    return shapes;
+}
+
+int(*shape3())[SHAPES_SIZE] {
+    static int shapes[SHAPES_SQUARE][SHAPES_SIZE] = { 0 };
+    shapes[0][0] = 43; shapes[0][1] = 7;
+    shapes[1][0] = 45; shapes[1][1] = 7;
+    shapes[2][0] = 47; shapes[2][1] = 7;
+    shapes[3][0] = 49; shapes[3][1] = 7;
+    shapes[4][0] = 51; shapes[4][1] = 7;
+    shapes[5][0] = 53; shapes[5][1] = 7;
+    shapes[6][0] = 55; shapes[6][1] = 7;
+    shapes[7][0] = 57; shapes[7][1] = 7;
+    shapes[8][0] = 59; shapes[8][1] = 7;
+    shapes[9][0] = 61; shapes[9][1] = 7;
+    shapes[10][0] = 63; shapes[10][1] = 7;
+    shapes[11][0] = 65; shapes[11][1] = 7;
+    shapes[12][0] = 67; shapes[12][1] = 7;
+    shapes[13][0] = 69; shapes[13][1] = 7;
+    shapes[14][0] = 71; shapes[14][1] = 7;
+    shapes[15][0] = 73; shapes[15][1] = 7;
+    shapes[16][0] = 43; shapes[16][1] = 8;
+    shapes[17][0] = 73; shapes[17][1] = 8;
+    shapes[18][0] = 43; shapes[18][1] = 9;
+    shapes[19][0] = 73; shapes[19][1] = 9;
+    shapes[20][0] = 43; shapes[20][1] = 10;
+    shapes[21][0] = 73; shapes[21][1] = 10;
+    shapes[22][0] = 43; shapes[22][1] = 11;
+    shapes[23][0] = 73; shapes[23][1] = 11;
+    shapes[24][0] = 43; shapes[24][1] = 12;
+    shapes[25][0] = 73; shapes[25][1] = 12;
+    shapes[26][0] = 43; shapes[26][1] = 13;
+    shapes[27][0] = 73; shapes[27][1] = 13;
+    shapes[28][0] = 43; shapes[28][1] = 14;
+    shapes[29][0] = 73; shapes[29][1] = 14;
+    shapes[30][0] = 43; shapes[30][1] = 15;
+    shapes[31][0] = 73; shapes[31][1] = 15;
+    shapes[32][0] = 43; shapes[32][1] = 16;
+    shapes[33][0] = 73; shapes[33][1] = 16;
+    shapes[34][0] = 43; shapes[34][1] = 17;
+    shapes[35][0] = 73; shapes[35][1] = 17;
+    shapes[36][0] = 43; shapes[36][1] = 18;
+    shapes[37][0] = 73; shapes[37][1] = 18;
+    shapes[38][0] = 43; shapes[38][1] = 19;
+    shapes[39][0] = 73; shapes[39][1] = 19;
+    shapes[40][0] = 43; shapes[40][1] = 20;
+    shapes[41][0] = 45; shapes[41][1] = 20;
+    shapes[42][0] = 47; shapes[42][1] = 20;
+    shapes[43][0] = 49; shapes[43][1] = 20;
+    shapes[44][0] = 51; shapes[44][1] = 20;
+    shapes[45][0] = 53; shapes[45][1] = 20;
+    shapes[46][0] = 55; shapes[46][1] = 20;
+    shapes[47][0] = 57; shapes[47][1] = 20;
+    shapes[48][0] = 59; shapes[48][1] = 20;
+    shapes[49][0] = 61; shapes[49][1] = 20;
+    shapes[50][0] = 63; shapes[50][1] = 20;
+    shapes[51][0] = 65; shapes[51][1] = 20;
+    shapes[52][0] = 67; shapes[52][1] = 20;
+    shapes[53][0] = 69; shapes[53][1] = 20;
+    shapes[54][0] = 71; shapes[54][1] = 20;
+    shapes[55][0] = 73; shapes[55][1] = 20;
+
+
+    return shapes;
 }

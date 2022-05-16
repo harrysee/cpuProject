@@ -43,16 +43,16 @@ void pushpull() {
 	PlaySound(TEXT("push.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	while (1) {
 		switch (game()) {
-		case GAMESTART:
-			x = 40;
-			start_game();
-			break;
+			case GAMESTART:
+				x = 40;
+				start_game();
+				break;
 
-		case EXIT:
-			PlaySound(NULL, 0, 0);
-			main();
+			case EXIT:
+				//PlaySound(NULL, 0, 0);
+				main();
 
-			break;
+				break;
 		}
 	}
 	return 0;
@@ -186,8 +186,8 @@ void line(int x, int y)
 	system("cls");
 	int i, line[21] = { 0 };
 	line[10] = 1;
-	line[4] = 2;
-	line[16] = 2;
+	line[2] = 2;
+	line[18] = 2;
 	gotoxy(31, 13);
 	for (i = 0; i < 78; i++)
 		printf(" ");
@@ -287,7 +287,7 @@ void game_fun() {
 			x -= 2;
 			line(x, y);
 			Sleep(100);
-			if (x == 28) {
+			if (x <= 25) {
 				gotoxy(78, 14);
 				printf("                                         ");
 				Sleep(500);
@@ -307,7 +307,7 @@ void game_fun() {
 			x += 2;
 			line(x, y);
 			Sleep(100);
-			if (x == 52) {
+			if (x >= 55) {
 				gotoxy(0, 14);
 				printf("                                              ");
 				Sleep(500);
